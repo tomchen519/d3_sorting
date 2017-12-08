@@ -5,7 +5,9 @@
 // GLOBALS
 var $
 var d3
+var svg
 var root
+var force
 var width = $(window).innerWidth()
 var height = $(window).innerHeight() - (2 * $('#footer-row').height())
 
@@ -70,14 +72,6 @@ $('a[href^="#"], div[href^="#"]').on('click', function (event) {
   };
 })
 
-// CREATE D3 FORCE LAYOUT
-var force = d3.layout.force()
-
-// CREATE SVG CONTAINER FOR VISUALIZATION
-var svg = d3.select('#d3-layout-container').append('svg')
-  .attr('width', '100%')
-  .attr('height', '100%')
-
 // RESET WIDTH AND HEIGHT VALUES
 // WHEN WINDOW IS RESIZED
 $(window).resize(function () {
@@ -87,27 +81,38 @@ $(window).resize(function () {
   update()
 })
 
-// LOAD DATA
-d3.json(DATA_FILE, function (error, data) {
-  // CATCH LOAD ERRORS
-  if (error) {
-    console.log(error)
-    throw error
-  };
+$(document).ready(function () {
+  // CREATE D3 FORCE LAYOUT
+  force = d3.layout.force()
 
-  // SET THE ROOT NODE
-  root = data
-  root.fixed = true
+  // CREATE SVG CONTAINER FOR VISUALIZATION
+  svg = d3.select('#d3-layout-container').append('svg')
+    .attr('width', '100%')
+    .attr('height', '100%')
+  console.log(svg)
 
-  // SET ROOT POSITION
-  root.x = width / 2
-  root.y = height / 2
+  // LOAD DATA
+  d3.json(DATA_FILE, function (error, data) {
+    // CATCH LOAD ERRORS
+    if (error) {
+      console.log(error)
+      throw error
+    };
 
-  // COLLAPSE ALL NODES FOR INITIAL DISPLAY
-  root.children.forEach(toggleAll)
+    // SET THE ROOT NODE
+    root = data
+    root.fixed = true
 
-  // UPDATE VISUALIZATION
-  update()
+    // SET ROOT POSITION
+    root.x = width / 2
+    root.y = height / 2
+
+    // COLLAPSE ALL NODES FOR INITIAL DISPLAY
+    root.children.forEach(toggleAll)
+
+    // UPDATE VISUALIZATION
+    update()
+  })
 })
 
 /*
@@ -204,7 +209,7 @@ function update () {
   // EMBEDED POST ON CLICK
   node.on('click', function (d) {
     // IGNORE EVENTS ON PARENT NODES
-    if (d.level == -1) { return }
+    if (d.level === -1) { return }
 
     // PREVENT COLLAPSE ON DRAG
     if (d3.event.defaultPrevented) { return }
