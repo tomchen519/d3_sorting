@@ -1,71 +1,88 @@
-<!doctype html>
-<html class="touch-styles {.if authenticatedAccount}authenticated-account{.end}">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    {.if template.mobileStylesEnabled}<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">{.end}
-    {squarespace-headers}
-    <script>(function(){var touchTest="ontouchstart"in window||navigator.msMaxTouchPoints;if(!touchTest){with(document.documentElement){className=className.replace(new RegExp("touch-styles"),"")}}})()</script>
+    <meta charset="utf-8">
+    <title>Instagram Web | Force layout with images</title>
+
+    <!-- COLORBOX AND BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/colorbox.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="assets/main.css">
+
+    <!-- JQUERY, BOOTSTRAP, COLORBOX, AND D3 LIBRARIES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <squarespace:script defer src="jquery.colorbox-min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <squarespace:script defer src="index.js" charset="utf-8"></script>
   </head>
-  {.if template.mobileStylesEnabled}<!-- Mobile Styles Enabled -->{.or}<!-- Mobile Styles Disabled -->{.end}
-  <body id="{squarespace.page-id}" class="{squarespace.page-classes}{.if website.logoImageUrl} has-logo-image{.or} has-site-title{.end}{.if website.siteTagLine} has-tagline{.end}{.if showCart} has-cart{.end}{.if websiteSettings.userAccountsSettings.loginAllowed} has-user-accounts{.end}{.if website.socialAccounts.0} has-social{.end}<squarespace:navigation navigationId="mainNav">{.if items.0} has-primary-nav{.end}</squarespace:navigation><squarespace:navigation navigationId="secondaryNav">{.if items.0} has-secondary-nav{.end}</squarespace:navigation>{.section collection}{.background-source-video?} has-video-background-banner{.end}{.end}" data-controller="BodyClassController">
-    <p>Hello World!</p>
 
-  <div class="overflow-wrapper">
+  <body>
+    <script>
+      var regEx = /firefox\/([^"]+)/g
+      var version = 50
+      var userAgent = navigator.userAgent.toLowerCase()
+      if (userAgent.indexOf('firefox/') > -1) {
+        var userVer = regEx.exec(userAgent)[1]
+        if (userVer < version) {
+          console.log(navigator.userAgent)
+          window.alert(
+            'Please update your browser' +
+            '\nThe application will not work properly'
+          )
+        };
+      };
+    </script>
 
-    {# <!-- include responsive navigation --> }
-    {@|apply responsive-nav.block}
+    <div class="parallax">
+      <div id="parallax-1" class="parallax-group">
+        <div id="parallax-header" class="parallax-layer parallax-layer-back"></div>
 
-    <div id="site" class="site-container">
+        <div class="parallax-layer parallax-layer-base">
 
-      {# <!-- include ancillary header layout --> }
-      {@|apply header.block}
+          <!-- HEADER ROW -->
+          <div class="row" id="header-row">
+            <header>
+              <div class="col-xs-8 col-xs-offset-2" id="header-section">
+                <h1>clique instagram web</h1>
+                <h3>an AI powered view of social performance</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Duis et urna sit amet nulla porta venenatis. Integer interdum et
+                  nisl sit amet eleifend. Mauris ut fringilla magna,
+                  sed sollicitudin nibh.
+                </p>
 
-      <div id="content" class="content-container">
-
-        {# <!-- custom project / gallery banner else page banner --> }
-        {.equal? collection.typeName "project"}
-          {@|apply project-banner.block}
-        {.or}
-          {.equal? collection.typeName "gallery"}
-            {@|apply project-banner.block}
-          {.or}
-            {@|apply page-banner.block}
-          {.end}
-        {.end}
-
-        <main id="page" class="site-page" role="main"{.equal? collection.typeName "project"} data-controller="ProjectController"{.end}>
-
-          {.equal? collection.typeName "page"}{.or}
-          {# <!-- when not a page, include collection specific header via open block field --> }
-          <squarespace:block-field class="collection-header" id="collection-header-{collection.id}" columns="12" label="Collection Header Content" />
-          {.end}
-
-          <div class="main-content" data-content-field="main-content">
-            {# <!-- render page main content --> }
-            {squarespace.main-content}
+                <!-- SCROLL ARROW -->
+                <div class="arrow-wrap" href="#d3-layout-container">
+                  <text class="hint">Click to Explore</text>
+                  <span class="arrow"></span>
+                </div>
+              </div>
+            </header>
           </div>
 
-          {.equal? collection.typeName "page"}{.or}
-          {# <!-- when not a page, include collection specific footer via open block field --> }
-          <squarespace:block-field class="collection-footer" id="collection-footer-{collection.id}" columns="12" label="Collection Footer Content" />
-          {.end}
+          <!-- VISUALIZATION ROW -->
+          <div class="row" id="layout-row">
+            <div class="col-xs-12" id="d3-layout-container"></div>
+          </div>
 
-          <squarespace:folder-navigation template="index-navigation" />
-
-        </main>
-
-        <footer id="footer" class="site-footer" role="contentinfo">
-          <squarespace:block-field id="footer-blocks" columns="12" label="Footer Content" />
-        </footer>
-
+          <!-- FOOTER ROW -->
+          <div id="footer-row">
+            <footer>
+              <div class="col-xs-12" id="footer-section">
+                <a href="#" id="clique-intelligence">
+                  <img class="footer-image" src="assets/clique_logo_white.png"></img>
+                  <h4>Intelligence</h4>
+                </a>
+              </div>
+            </footer>
+          </div>
+        </div>
       </div>
     </div>
-
-
-    <squarespace:script src="site-bundle.js" combo="false" />
-
-    {squarespace-footers}
-
-
+    <div id="parallax-footer" class="parallax-layer parallax-layer-back"></div>
   </body>
 </html>
