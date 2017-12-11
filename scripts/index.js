@@ -39,38 +39,24 @@ $(document)
     $('body').css({ overflow: '' })
   })
 
-// SCROLL ARROW OPACITY
-$('.parallax').scroll(function () {
-  // GET CURRENT SCROLL POSITION
-  var windowTop = $('.parallax').scrollTop()
 
-  // MULTIPLY BY 1.5 SO ARROW WILL BECOME
-  // TRANSPARENT HALFWAY UP THE PAGE
-  windowTop = windowTop * 1.5
-
-  // GET WINDOW HEIGHT
-  var windowHeight = $('.parallax').height()
-
-  // POSITION IS INVERSE OF SCROLL PROPORTION
-  var position = 1 - (windowTop / windowHeight)
-
-  // SET ARROW OPACITY BASED ON SCROLL POSITION
-  // NO SCROLLING = 1, HALFWAY UP THE PAGE = 0
-  $('.arrow-wrap').css('opacity', position)
-})
 
 // SMOOTHLY SCROLL TO ANCHORS
 // SEE: https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
-$('a[href^="#"], div[href^="#"]').on('click', function (event) {
-  var target = $(this.getAttribute('href'))
-  if (target.length) {
-    event.preventDefault()
-
-    $('.parallax').stop().animate({
-      scrollTop: $('body').height()
-    }, 2000)
-  };
-})
+// $('a[href^="#"], div[href^="#"]').on('click', function (event) {
+//   var target = $(this.getAttribute('href'))
+//   if (target.length) {
+//     event.preventDefault()
+//
+//     $('.parallax').stop().animate({
+//       scrollTop: $('body').height()
+//     }, 2000)
+//   };
+// })
+//
+// $('.arrow-wrap').on('click', function() {
+//   console.log("CLICKED!!!!")
+// })
 
 // RESET WIDTH AND HEIGHT VALUES
 // WHEN WINDOW IS RESIZED
@@ -82,6 +68,40 @@ $(window).resize(function () {
 })
 
 $(document).ready(function () {
+
+  // SMOOTHLY SCROLL TO ANCHORS
+  $('a[href^="#"], div[href^="#"]').on('click', function (event) {
+    var target = $(this.getAttribute('href'))
+    if (target.length) {
+      event.preventDefault()
+
+      $('.parallax').stop().animate({
+        scrollTop: $('body').height()
+      }, 2000)
+    };
+  })
+
+  // SCROLL ARROW OPACITY
+  $('.parallax').scroll(function () {
+    // GET CURRENT SCROLL POSITION
+    var windowTop = $('.parallax').scrollTop()
+
+    // MULTIPLY BY 1.5 SO ARROW WILL BECOME
+    // TRANSPARENT HALFWAY UP THE PAGE
+    windowTop = windowTop * 1.5
+
+    // GET WINDOW HEIGHT
+    var windowHeight = $('.parallax').height()
+
+    // POSITION IS INVERSE OF SCROLL PROPORTION
+    var position = 1 - (windowTop / windowHeight)
+
+    // SET ARROW OPACITY BASED ON SCROLL POSITION
+    // NO SCROLLING = 1, HALFWAY UP THE PAGE = 0
+    $('.arrow-wrap').css('opacity', position)
+  })
+
+
   // CREATE D3 FORCE LAYOUT
   force = d3.layout.force()
 
