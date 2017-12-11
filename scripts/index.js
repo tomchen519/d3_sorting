@@ -8,8 +8,8 @@ var d3
 var svg
 var root
 var force
-var width = $(window).innerWidth()
-var height = $(window).innerHeight() - (2 * $('#footer-row').height())
+var width
+var height
 
 // OTHER CONSTANT VALUES / SETTINGS
 const DATA_FILE = '/assets/owned_competitive.json'
@@ -89,7 +89,9 @@ $(document).ready(function () {
   svg = d3.select('#d3-layout-container').append('svg')
     .attr('width', '100%')
     .attr('height', '100%')
-  console.log(svg)
+
+  width = $(window).innerWidth()
+  height = $('#d3-layout-container').height()
 
   // LOAD DATA
   d3.json(DATA_FILE, function (error, data) {
