@@ -12,7 +12,7 @@ var width
 var height
 
 // OTHER CONSTANT VALUES / SETTINGS
-const DATA_FILE = '/assets/owned_competitive.json'
+const DATA_FILE = '/assets/data/owned_competitive.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const BASE_IMAGE_URL = 'https://scontent-lax3-2.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/'
 const RATE_MULTIPIER = 200
@@ -238,7 +238,9 @@ function update () {
 
     var element = d3.select(this)
     toggleChildren(d, element)
-    displayModal(d, element)
+    var embed_div = displayModal(d, element)
+    console.log(embed_div)
+
   }).on('mouseenter', function (d) {
     // IGNORE EVENTS ON PARENT NODES
     if (d.level <= 0) { return }
@@ -556,6 +558,7 @@ function displayModal (d, element) {
       url: embedReqUrl
     }).done(function (res) {
       var embedHtml = res.html
+      console.log(embedHtml)
       if (embedHtml) {
         $.colorbox({
           transition: 'none',
@@ -568,8 +571,9 @@ function displayModal (d, element) {
         })
         if (window.instgrm) {
           window.instgrm.Embeds.process()
-        } else {
-        };
+        }
+        // var embed_div = $('div.EmbedFrame.EmbedMedia.EmbedFrameWithSidecar')
+        // embed_div.style.paddingBottom = 0
       };
     })
   };

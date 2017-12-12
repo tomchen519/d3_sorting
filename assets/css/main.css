@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic:400,600);
 
 #cboxOverlay { opacity: 0.5 !important; }
+.EmbedFrame { padding-bottom: 0 !important; }
+.EmbedFrame .EmbedMedia .EmbedFrameWithSidecar { padding-bottom: 0 !important; }
 
 html {
   width: 100%;
@@ -224,7 +226,7 @@ footer {
 
 .parallax-layer-back {
   transform: translateZ(-1px) scale(2);
-  background-image: url('test_img1.jpg');
+  background-image: url('../test_img1.jpg');
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
