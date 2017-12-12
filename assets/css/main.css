@@ -226,7 +226,7 @@ footer {
 
 .parallax-layer-back {
   transform: translateZ(-1px) scale(2);
-  background-image: url('../test_img1.jpg');
+  background-image: url('../images/test_img1.jpg');
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;

@@ -233,7 +233,6 @@ function update () {
   .on('mouseleave', function (d) {
     // IGNORE EVENTS ON PARENT NODES
     if (d.level <= 0) { return }
-    // console.log('level:' + d.level)
 
     var element = d3.select(this)
     shrinkElement(element)
@@ -358,7 +357,6 @@ function enlargeElement (element) {
     .style('font-size', '30px')
     .style('fill-opacity', TEXT_OVERLAY_OPACITY)
     .style('alignment-baseline', function (d) {
-      console.log(d.level)
       if (d.level === 2) { return 'auto' } else { return 'middle' }
     })
 
