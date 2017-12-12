@@ -366,7 +366,7 @@ function enlargeElement (element) {
 
   // SLIDE CATEGORY TEXT DOWN A LITTLE
   element.selectAll('.category-text-wrapper').transition().ease('linear')
-    .style('margin-top', '25px')
+    .style({'padding-top': '40px'})
 };
 
 /*
@@ -394,7 +394,7 @@ function shrinkElement (element) {
 
   // SLIDE CATEGORY TEXT BACK UP
   element.selectAll('.category-text-wrapper').transition().ease('linear')
-    .style('margin-top', '0px')
+    .style({'padding-top': '0px'})
 };
 
 /*
