@@ -12,7 +12,7 @@ var width
 var height
 
 // OTHER CONSTANT VALUES / SETTINGS
-const DATA_FILE = '/assets/owned_competitive.json'
+const DATA_FILE = '/assets/data/owned_competitive.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const BASE_IMAGE_URL = 'https://scontent-lax3-2.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/'
 const RATE_MULTIPIER = 200
@@ -80,7 +80,6 @@ $(document).ready(function () {
     // NO SCROLLING = 1, HALFWAY UP THE PAGE = 0
     $('.arrow-wrap').css('opacity', position)
   })
-
 
   // CREATE D3 FORCE LAYOUT
   force = d3.layout.force()
@@ -367,7 +366,7 @@ function enlargeElement (element) {
   element.selectAll('.category-text').transition().ease('linear')
     .style('color', DEFAULT_FILL)
 
-  //
+  // SLIDE CATEGORY TEXT DOWN A LITTLE
   element.selectAll('.category-text-wrapper').transition().ease('linear')
     .style('margin-top', '25px')
 };
@@ -391,10 +390,11 @@ function shrinkElement (element) {
     .style('font-size', '16px')
     .style('fill-opacity', 0)
 
-  // FADE IN CATEGORY TEXT
+  // TRANSITION CATEGORY TEXT COLOR
   element.selectAll('.category-text').transition().ease('linear')
     .style('color', '#8c8c8c')
 
+  // SLIDE CATEGORY TEXT BACK UP
   element.selectAll('.category-text-wrapper').transition().ease('linear')
     .style('margin-top', '0px')
 };
@@ -563,7 +563,6 @@ function displayModal (d, element) {
         })
         if (window.instgrm) {
           window.instgrm.Embeds.process()
-        } else {
         };
       };
     })
