@@ -111,7 +111,6 @@ footer {
   fill: white;
   font-weight: bolder;
   text-align: center;
-  alignment-baseline: middle;
   text-anchor: middle;
   pointer-events: none;
   fill-opacity: 0;
@@ -121,6 +120,7 @@ footer {
   top: 50%;
   position: relative;
   text-align: center;
+  line-height: normal;
   transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   -moz-transform: translateY(-50%);

@@ -39,25 +39,6 @@ $(document)
     $('body').css({ overflow: '' })
   })
 
-
-
-// SMOOTHLY SCROLL TO ANCHORS
-// SEE: https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
-// $('a[href^="#"], div[href^="#"]').on('click', function (event) {
-//   var target = $(this.getAttribute('href'))
-//   if (target.length) {
-//     event.preventDefault()
-//
-//     $('.parallax').stop().animate({
-//       scrollTop: $('body').height()
-//     }, 2000)
-//   };
-// })
-//
-// $('.arrow-wrap').on('click', function() {
-//   console.log("CLICKED!!!!")
-// })
-
 // RESET WIDTH AND HEIGHT VALUES
 // WHEN WINDOW IS RESIZED
 $(window).resize(function () {
@@ -68,9 +49,8 @@ $(window).resize(function () {
 })
 
 $(document).ready(function () {
-
   // SMOOTHLY SCROLL TO ANCHORS
-  $('a[href^="#"], div[href^="#"]').on('click', function (event) {
+  $('a[href^="#"], div[href^="#"]').click(function (event) {
     var target = $(this.getAttribute('href'))
     if (target.length) {
       event.preventDefault()
@@ -239,7 +219,9 @@ function update () {
     var element = d3.select(this)
     toggleChildren(d, element)
     displayModal(d, element)
-  }).on('mouseenter', function (d) {
+  })
+
+  .on('mouseenter', function (d) {
     // IGNORE EVENTS ON PARENT NODES
     if (d.level <= 0) { return }
 
@@ -247,7 +229,9 @@ function update () {
     this.parentNode.appendChild(this)
     var element = d3.select(this)
     enlargeElement(element)
-  }).on('mouseleave', function (d) {
+  })
+
+  .on('mouseleave', function (d) {
     // IGNORE EVENTS ON PARENT NODES
     if (d.level <= 0) { return }
     // console.log('level:' + d.level)
@@ -358,7 +342,7 @@ function boundedUpdate (d, axis, coordType) {
 
 /*
  * ENLARGES IMAGE CIRCLES, OVERLAYS, SHOWS OVERLAY /
- * TEXT, AND FADES OUT CATEGORY TEXT ON MOUSEOVER
+ * TEXT, AND CHANGES CATEGORY TEXT COLOR ON MOUSEOVER
  */
 function enlargeElement (element) {
   // ENLARGE IMAGE
@@ -370,19 +354,27 @@ function enlargeElement (element) {
     .attr('r', MAX_RADIUS)
     .style('fill-opacity', OVERLAY_OPACITY)
 
-  // ENLARGE OVERLAY TEXT
+  // ENLARGE OVERLAY TEXT AND TRANSITION CATEGORY TEXT
   element.selectAll('.overlay-text').transition().ease('linear')
     .style('font-size', '30px')
     .style('fill-opacity', TEXT_OVERLAY_OPACITY)
+    .style('alignment-baseline', function (d) {
+      console.log(d.level)
+      if (d.level === 2) { return 'auto' } else { return 'middle' }
+    })
 
-  // FADE OUT CATEGORY TEXT
+  // TRANSITION CATEGORY TEXT COLOR
   element.selectAll('.category-text').transition().ease('linear')
-    .style('opacity', '0')
+    .style('color', DEFAULT_FILL)
+
+  //
+  element.selectAll('.category-text-wrapper').transition().ease('linear')
+    .style('margin-top', '25px')
 };
 
 /*
  * SHRINKS IMAGE CIRCLES, OVERLAYS, TO ORIGINAL SIZE,
- * HIDES OVERLAY / TEXT, FADES IN CATEGORY TEXT
+ * HIDES OVERLAY / TEXT, RE-COLORS CATEGORY TEXT
  */
 function shrinkElement (element) {
   // SHRINK IMAGE
@@ -401,7 +393,10 @@ function shrinkElement (element) {
 
   // FADE IN CATEGORY TEXT
   element.selectAll('.category-text').transition().ease('linear')
-    .style('opacity', '1')
+    .style('color', '#8c8c8c')
+
+  element.selectAll('.category-text-wrapper').transition().ease('linear')
+    .style('margin-top', '0px')
 };
 
 /*
@@ -564,7 +559,7 @@ function displayModal (d, element) {
           scalePhotos: true,
           html: embedHtml,
           width: '675px',
-          height: '700px',
+          height: '700px'
         })
         if (window.instgrm) {
           window.instgrm.Embeds.process()
