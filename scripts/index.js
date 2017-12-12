@@ -356,7 +356,7 @@ function enlargeElement (element) {
   element.selectAll('.overlay-text').transition().ease('linear')
     .style('font-size', '30px')
     .style('fill-opacity', TEXT_OVERLAY_OPACITY)
-    .style('alignment-baseline', function (d) {
+    .style('dominant-baseline', function (d) {
       if (d.level === 2) { return 'auto' } else { return 'middle' }
     })
 

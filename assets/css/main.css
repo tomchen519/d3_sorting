@@ -98,7 +98,7 @@ footer {
 .image-circle {
   cursor: pointer;
   stroke-width: 1.5;
-  stroke-opacity: 0.1
+  stroke-opacity: 0.1;
 }
 
 .circle-overlay {
