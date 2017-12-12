@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic:400,600);
 
-#cboxOverlay { opacity: 0.5 !important; }
+#cboxOverlay { opacity: 0.8 !important; }
 .EmbedFrame { padding-bottom: 0 !important; }
 .EmbedFrame .EmbedMedia .EmbedFrameWithSidecar { padding-bottom: 0 !important; }
 
