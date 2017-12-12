@@ -29,10 +29,16 @@
         if (userVer < version) {
           console.log(navigator.userAgent)
           window.alert(
-            'Please update your browser' +
-            '\nThe application will not work properly'
+            'Please update your browser.\n' +
+            'The application may not work properly'
           )
         };
+      } else if (userAgent.indexOf('safari') > -1) {
+        window.alert(
+          'Please use Chrome or Firefox.\n' +
+          'The application may not work properly on Safari'
+        )
+
       };
     </script>
 
