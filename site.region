@@ -38,14 +38,14 @@
           'Please use Chrome or Firefox.\n' +
           'The application may not work properly on Safari'
         )
-
       };
     </script>
 
+
+    <div id="loading"></div>
     <div class="parallax">
       <div id="parallax-1" class="parallax-group">
         <div id="parallax-header" class="parallax-layer parallax-layer-back"></div>
-
         <div class="parallax-layer parallax-layer-base">
 
           <!-- HEADER ROW -->
