@@ -551,7 +551,7 @@ function displayModal (d, element) {
       var embedHtml = res.html
       if (embedHtml) {
         $.colorbox({
-          transition: 'none',
+          transition: 'elastic',
           opacity: 0.1,
           photo: true,
           scalePhotos: true,
