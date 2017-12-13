@@ -46,7 +46,7 @@ h1, h3 {
   text-transform: uppercase;
 }
 
-h3, h4, p {
+h3, h4, #main_desc {
   color: rgb(200, 200, 215);
   letter-spacing: 5px;
 }
@@ -59,12 +59,13 @@ h4 {
   margin-left: 5px;
 }
 
-p {
+#main_desc {
   text-align: center;
   padding-top: 25px;
 }
 
 header, footer {
+  position: relative;
   height: 90vh;
   background-color: rgba(0,0,0,0.4);
   background-blend-mode: color;
@@ -253,4 +254,29 @@ footer {
 #parallax-footer {
   transform: none;
   z-index: -1;
+}
+
+.instruction {
+  display: inline-block;
+  position: absolute;
+  width: 95%;
+  bottom: 0;
+  left: 0;
+  color: rgb(150, 150, 150);
+  opacity: 0;
+  margin: 0 0 0 35px;
+  padding: 5px 15px;
+}
+
+#inst_desc {
+  letter-spacing: 0;
+  font-size: 13px;
+}
+.alert-info {
+  background-color: #D6D8D9;
+  border-color: #C6C8CA;
+}
+.alert-dismissable .close, .alert-dismissible .close {
+  color: rgba(0,0,0,0.8);
+  margin-right: 10px;
 }

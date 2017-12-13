@@ -79,6 +79,7 @@ $(document).ready(function () {
     // SET ARROW OPACITY BASED ON SCROLL POSITION
     // NO SCROLLING = 1, HALFWAY UP THE PAGE = 0
     $('.arrow-wrap').css('opacity', position)
+    $('.instruction').css('opacity', position * -6)
   })
 
   // CREATE D3 FORCE LAYOUT
