@@ -262,21 +262,23 @@ footer {
   width: 95%;
   bottom: 0;
   left: 0;
-  color: rgb(150, 150, 150);
+  color: rgb(200, 200, 215);
   opacity: 0;
   margin: 0 0 0 35px;
   padding: 5px 15px;
 }
+p {
+  text-align: center;
 
+}
 #inst_desc {
   letter-spacing: 0;
-  font-size: 13px;
+  text-align: center;
+  font-size: 15px;
 }
-.alert-info {
-  background-color: #D6D8D9;
-  border-color: #C6C8CA;
-}
-.alert-dismissable .close, .alert-dismissible .close {
-  color: rgba(0,0,0,0.8);
-  margin-right: 10px;
+
+
+.hide_toggle {
+  color: rgb(200, 200, 215);
+  left: calc(100vw * 0.4)
 }

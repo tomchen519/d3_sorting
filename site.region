@@ -67,17 +67,19 @@
                   <span class="arrow"></span>
                 </div>
               </div>
-              <div class="instruction alert alert-info alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <p id="inst_desc">
-                  Instagram posts are clustered by the account type (owned or
-                  competitive), brands, and categories. Clicking on a grouping
-                  node will display its memebers. Nodes representing the
-                  posts contain a preview of the post image, which can be
-                  expanded by hovering the mouse over it. To view the post in
-                  more detail, click on the node.
+              <div class="instruction">
+                <p>
+                  <span id="inst_desc">
+                    Instagram posts are clustered by the account type (owned or
+                    competitive), brands, and categories. Clicking on a grouping
+                    node will display its memebers. Nodes representing the
+                    posts contain a preview of the post image, which can be
+                    expanded by hovering the mouse over it. To view the post in
+                    more detail, click on the node.
+                  </span>
+                  <span>
+                    <a id="text_toggle">hide</a>
+                  </span>
                 </p>
 
               </div>

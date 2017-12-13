@@ -59,8 +59,30 @@ $(document).ready(function () {
         scrollTop: $('body').height()
       }, 2000)
     };
+
   })
 
+  $('#text_toggle').click(function() {
+    $('#text_toggle').text()
+    $('#inst_desc').toggle()
+    if ($('#text_toggle').text() == "hide") {
+      console.log("hide")
+      $('#text_toggle').text("Click to show").addClass("hide_toggle")
+      $('.instruction').addClass("hide_toggle").css({
+        "width": "15%"
+      })
+    } else {
+      console.log("SHOW")
+      $('#text_toggle').text("hide").removeClass("hide_toggle")
+      $('.instruction').removeClass("hide_toggle").css({
+        "width": "95%"
+      })
+    }
+  })
+
+  // $('#show_text').click(function() {
+  //   $('#inst_desc').html(inst_text)
+  // })
   // SCROLL ARROW OPACITY
   $('.parallax').scroll(function () {
     // GET CURRENT SCROLL POSITION
@@ -79,8 +101,10 @@ $(document).ready(function () {
     // SET ARROW OPACITY BASED ON SCROLL POSITION
     // NO SCROLLING = 1, HALFWAY UP THE PAGE = 0
     $('.arrow-wrap').css('opacity', position)
-    $('.instruction').css('opacity', position * -6)
+    $('.instruction').css('opacity', position * -5.5)
   })
+
+
 
   // CREATE D3 FORCE LAYOUT
   force = d3.layout.force()
