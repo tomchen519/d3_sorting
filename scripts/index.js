@@ -66,13 +66,11 @@ $(document).ready(function () {
     $('#text_toggle').text()
     $('#inst_desc').toggle()
     if ($('#text_toggle').text() == "hide") {
-      console.log("hide")
       $('#text_toggle').text("Click to show").addClass("hide_toggle")
       $('.instruction').addClass("hide_toggle").css({
         "width": "15%"
       })
     } else {
-      console.log("SHOW")
       $('#text_toggle').text("hide").removeClass("hide_toggle")
       $('.instruction').removeClass("hide_toggle").css({
         "width": "95%"
