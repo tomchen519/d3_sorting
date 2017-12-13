@@ -73,8 +73,8 @@
                     competitive), brands, and categories. Clicking on a grouping
                     node will expand and display its memebers. Nodes representing IG
                     posts show a preview of the image, which can be expanded by
-                    hovering the mouse over it. To view more details of the post
-                    more detail, click on the node.
+                    hovering the mouse over it. To view more details of the
+                    post, click on the node.
                   </span>
                   <span>
                     <a id="text_toggle">hide</a>

@@ -78,9 +78,6 @@ $(document).ready(function () {
     }
   })
 
-  // $('#show_text').click(function() {
-  //   $('#inst_desc').html(inst_text)
-  // })
   // SCROLL ARROW OPACITY
   $('.parallax').scroll(function () {
     // GET CURRENT SCROLL POSITION
@@ -101,8 +98,6 @@ $(document).ready(function () {
     $('.arrow-wrap').css('opacity', position)
     $('.instruction').css('opacity', position * -5.5)
   })
-
-
 
   // CREATE D3 FORCE LAYOUT
   force = d3.layout.force()
