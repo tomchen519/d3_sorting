@@ -1,4 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Didact+Gothic:400,600);
+@font-face {
+    font-family: 'Futura URW';
+    src: url('//fonts.cliqueimg.com/futura-book.woff2') format('woff2'),url('//fonts.cliqueimg.com/futura-book.woff') format('woff');
+    /* font-weight: 400; */
+    font-style: normal
+}
 
 #cboxOverlay { opacity: 0.8 !important; }
 .EmbedFrame { padding-bottom: 0 !important; }
@@ -21,7 +26,7 @@ html {
 }
 
 body {
-  font-family: "Didact Gothic";
+  font-family: 'Futura URW';
   line-height: 160%;
   font-size: 16px;
   padding: 0px;
@@ -49,6 +54,8 @@ h3, h4, p {
 h4 {
   display: inline-block;
   vertical-align: middle;
+  font-size: 24px;
+  padding-top: 6px;
   margin-left: 5px;
 }
 
