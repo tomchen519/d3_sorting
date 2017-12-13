@@ -111,6 +111,15 @@ $(document).ready(function () {
     // COLLAPSE ALL NODES FOR INITIAL DISPLAY
     root.children.forEach(toggleAll)
 
+    // FADE OUT AND REMOVE LOADING OVERLAY
+    var removeLoading = function () {
+      $('#loading').remove()
+    }
+
+    setTimeout(function () {
+      $('#loading').fadeOut('slow', 'linear', removeLoading)
+    }, 2000)
+
     // UPDATE VISUALIZATION
     update()
   })
