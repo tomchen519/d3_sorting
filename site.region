@@ -33,14 +33,8 @@
             'The application may not work properly'
           )
         };
-      } else if (userAgent.indexOf('safari') > -1 & userAgent.indexOf('chrome') === -1) {
-        window.alert(
-          'Please use Chrome or Firefox.\n' +
-          'The application may not work properly on Safari'
-        )
-      };
+      }
     </script>
-
 
     <div id="loading"></div>
     <div class="parallax">
@@ -55,9 +49,10 @@
                 <h1>clique visual intelligence</h1>
                 <h3>a categorical view of top performing instagram posts</h3>
                 <p id="description">
-                  This data visualization tool provide a simplified view to
-                  compare Instagram posts by engagement rate grouped by post
-                  categories and brands.
+                  We used image recognition to categorize the top performing
+                  posts from Clique's Instagram accounts as well as those of
+                  a few competitors. Click the arrow below to explore the
+                  posts and view their performance.
                 </p>
 
                 <!-- SCROLL ARROW -->
@@ -71,12 +66,12 @@
               <div id="instructions-container">
                 <p id="instructions">
                   <span id="instructions-content">
-                    Instagram posts are clustered by the account type (owned or
-                    competitive), brands, and categories. Clicking on a grouping
-                    node will expand and display its memebers. Nodes representing IG
-                    posts show a preview of the image, which can be expanded by
-                    hovering the mouse over it. To view more details of the post
-                    more detail, click on the node.
+                    Posts are organized by owner, brand, and category. Click on
+                    a bubble to see the brands, categories, or posts it contains.
+                    Larger bubbles represent higher engagement. Hover your mouse
+                    over a bubble to see the engagement rate (total engagements / following)
+                    for that brand, category, or post. You can also click on a
+                    post to view the original IG image and caption.
                   </span>
                   <a id="instructions-toggle">hide</a>
                 </p>
