@@ -16,7 +16,7 @@ var instructionsHidden = false
 const DATA_FILE = '/assets/data/owned_competitive.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const BASE_IMAGE_URL = 'https://scontent-lax3-2.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/'
-const RATE_MULTIPIER = 200
+const RATE_MULTIPIER = 300
 const DEFAULT_RADIUS = 30
 const DEFAULT_FILL = '#fff'
 const DEFAULT_LINK_DISTANCE = 200
@@ -395,7 +395,7 @@ function enlargeElement (element) {
 
   // SLIDE CATEGORY TEXT DOWN A LITTLE
   element.selectAll('.category-text-wrapper').transition().ease('linear')
-    .style({'padding-top': '40px'})
+    .style({'padding-top': '50px'})
 };
 
 /*
@@ -443,8 +443,10 @@ function getLinkDistance (d) {
 function getNodeCharge (d) {
   if (d.level === 0) {
     return DEFAULT_CHARGE
+  } else if (d.level === 3) {
+    return (d.level + 1) * DEFAULT_CHARGE
   } else {
-    return Math.abs(d.level) * DEFAULT_CHARGE
+    return Math.pow(d.level, 3) * DEFAULT_CHARGE
   }
 };
 
