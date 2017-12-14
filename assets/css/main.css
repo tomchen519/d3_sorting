@@ -87,7 +87,7 @@ h4 {
 header, footer {
   position: relative;
   height: 90vh;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.5);
   background-blend-mode: color;
   overflow: hidden;
 }
