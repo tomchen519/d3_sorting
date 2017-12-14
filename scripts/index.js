@@ -27,8 +27,6 @@ const TEXT_OVERLAY_OPACITY = 0.9
 const FOREIGN_OBJ_SIZE = 100
 const MAX_RADIUS = 75
 const TOGGLE_LEVEL = 0
-const NO_LINKS = [-1, 2]
-const NO_BORDERS = [-1]
 
 // DISABLE SCROLLING WHILE
 // VIEWING COLORBOX OVERLAY
@@ -176,9 +174,7 @@ function update () {
     .data(edges, function (d) { return d.target.id })
 
   edge.enter().append('svg:line')
-    // .attr('class', 'edge')
     .attr('class', function (d) { return 'edge level_' + d.source.level })
-    .style('stroke', function (d) { return getEdgeStroke(d) })
 
   // REMOVE ANY OLD EDGES
   edge.exit().remove()
@@ -220,10 +216,9 @@ function update () {
   // WITH CALCULATED RADIUS
   var imageCircle = nodeEnter
     .append('svg:circle')
-    .attr('class', 'image-circle')
+    .attr('class', function (d) { return 'image-circle level_' + d.level })
     .attr('r', function (d) { return getCircleRadius(d) })
     .style('fill', function (d) { return getCircleFill(d) })
-    .style('stroke', function (d) { return getCircleStroke(d) })
 
   // ADD CIRCLE OVERLAY
   // TO THE NODE GROUP
@@ -432,6 +427,8 @@ function shrinkElement (element) {
 function getLinkDistance (d) {
   if (d.source.level === -1) {
     return DEFAULT_LINK_DISTANCE * 2
+  } else if (d.source.level === 2) {
+    return getCircleRadius(d)
   } else {
     return DEFAULT_LINK_DISTANCE - (d.source.level * 90)
   }
@@ -490,30 +487,6 @@ function getCircleRadius (d) {
     return DEFAULT_RADIUS
   }
 }
-
-/*
- * SETS CIRCLE STROKE
- * BASED ON NODE LEVEL
- */
-function getCircleStroke (d) {
-  if (NO_BORDERS.indexOf(d.level) !== -1) {
-    return 'none'
-  } else {
-    return 'black'
-  }
-};
-
-/*
- * SETS EDGE STROKE
- * BASED ON NODE LEVEL
- */
-function getEdgeStroke (d) {
-  if (NO_LINKS.indexOf(d.source.level) !== -1) {
-    return 'none'
-  } else {
-    return 'black'
-  }
-};
 
 /*
  * TOGGLE CHILDREN ON CLICK

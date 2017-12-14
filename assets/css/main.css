@@ -125,19 +125,29 @@ footer {
 }
 
 .edge {
+  stroke: black;
   stroke-linecap: round;
   stroke-width: 2;
   stroke-opacity: 0.1;
 }
 
-.level_1 {
+.edge.level_-1, .edge.level_2 {
+  stroke: none;
+}
+
+.edge.level_1 {
   stroke-dasharray: 1, 5;
 }
 
 .image-circle {
-  cursor: pointer;
+  stroke: black;
   stroke-width: 1.5;
   stroke-opacity: 0.1;
+  cursor: pointer;
+}
+
+.image-circle.level_-1 {
+  stroke: none;
 }
 
 .circle-overlay {
