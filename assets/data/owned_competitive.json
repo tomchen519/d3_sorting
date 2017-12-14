@@ -1855,7 +1855,7 @@
           ]
         },
         {
-          "name": "sc",
+          "name": "sephora",
           "level": 1,
           "engage_rate": 0.006289678615122011,
           "post_id": "sc",
@@ -1901,15 +1901,6 @@
               "name": "face",
               "children": [
                 {
-                  "celeb": "Stella Mwangi",
-                  "level": 3,
-                  "engagement": 1820,
-                  "engage_rate": 0.007999824179688359,
-                  "post_url": "https://www.instagram.com/p/Ba9PYxjB6-s/",
-                  "post_id": "Ba9PYxjB6-s",
-                  "image_url": "https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e35/23161317_1494787493969307_3101904571778203648_n.jpg"
-                },
-                {
                   "celeb": null,
                   "level": 3,
                   "engagement": 1792,
@@ -1937,15 +1928,6 @@
                   "image_url": "https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e35/23279386_1937716253169244_3177738030479835136_n.jpg"
                 },
                 {
-                  "celeb": "Nicoletta Ceccoli",
-                  "level": 3,
-                  "engagement": 1507,
-                  "engage_rate": 0.006624030241093602,
-                  "post_url": "https://www.instagram.com/p/BbCY02wB6rO/",
-                  "post_id": "BbCY02wB6rO",
-                  "image_url": "https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e35/23101016_495287754204001_6141135679398084608_n.jpg"
-                },
-                {
                   "celeb": null,
                   "level": 3,
                   "engagement": 1325,
@@ -1971,15 +1953,6 @@
                   "post_url": "https://www.instagram.com/p/BbR8FPBh5JR/",
                   "post_id": "BbR8FPBh5JR",
                   "image_url": "https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e15/23421763_1980232128965357_8120763492845223936_n.jpg"
-                },
-                {
-                  "celeb": "Amy Jo Johnson",
-                  "level": 3,
-                  "engagement": 816,
-                  "engage_rate": 0.0035867343574866486,
-                  "post_url": "https://www.instagram.com/p/BbHoVANBk6L/",
-                  "post_id": "BbHoVANBk6L",
-                  "image_url": "https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e15/23279867_913698895461409_2848994988761546752_n.jpg"
                 }
               ]
             },
