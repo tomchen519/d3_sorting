@@ -34,10 +34,6 @@ body {
   font-variant-ligatures: none;
 }
 
-.row {
-  margin-right: 0;
-}
-
 h1, h3 {
   color: rgb(240, 240, 255);
   text-align: center;
@@ -237,6 +233,7 @@ footer {
   right: 0;
   bottom: 0;
   left: 0;
+  width: 100vw;
 }
 
 .parallax-layer-base {
@@ -248,7 +245,6 @@ footer {
   background-image: url('../images/CAROLINE_ISSA_80.jpg');
   background-repeat: no-repeat;
   background-position: center;
-  width: 100%;
 }
 
 #parallax-footer {
@@ -266,17 +262,13 @@ footer {
   opacity: 0;
   margin: 0 0 0 35px;
   padding: 5px 15px;
-}
-p {
   text-align: center;
-
 }
+
 #inst_desc {
   letter-spacing: 0;
-  text-align: center;
   font-size: 15px;
 }
-
 
 .hide_toggle {
   color: rgb(200, 200, 215);

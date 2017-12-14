@@ -1019,15 +1019,6 @@
               "name": "celebrities",
               "children": [
                 {
-                  "celeb": "Jo Woodcock",
-                  "level": 3,
-                  "engagement": 2786,
-                  "engage_rate": 0.0631645770512617,
-                  "post_url": "https://www.instagram.com/p/BbilfRkgPXt/",
-                  "post_id": "BbilfRkgPXt",
-                  "image_url": "https://scontent-lax3-2.cdninstagram.com/t51.2885-15/e35/23594953_132476587398213_5759680804703698944_n.jpg"
-                },
-                {
                   "celeb": "Wyonna Rider",
                   "level": 3,
                   "engagement": 1995,
@@ -1071,15 +1062,6 @@
                   "post_url": "https://www.instagram.com/p/BauW79mgJAv/",
                   "post_id": "BauW79mgJAv",
                   "image_url": "https://scontent-lax3-2.cdninstagram.com/t51.2885-15/e35/22708957_1423158427788634_2744596153545785344_n.jpg"
-                },
-                {
-                  "celeb": "Adaeze Yobo",
-                  "level": 3,
-                  "engagement": 777,
-                  "engage_rate": 0.017616251388668465,
-                  "post_url": "https://www.instagram.com/p/BbdHqqCg2KQ/",
-                  "post_id": "BbdHqqCg2KQ",
-                  "image_url": "https://scontent-lax3-2.cdninstagram.com/t51.2885-15/e35/23594573_370786800045837_9137650481105993728_n.jpg"
                 },
                 {
                   "celeb": "Bella Hadid",
