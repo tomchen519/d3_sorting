@@ -10,6 +10,7 @@ var root
 var force
 var width
 var height
+var instructionsHidden = false
 
 // OTHER CONSTANT VALUES / SETTINGS
 const DATA_FILE = '/assets/data/owned_competitive.json'
@@ -59,23 +60,6 @@ $(document).ready(function () {
         scrollTop: $('body').height()
       }, 2000)
     };
-
-  })
-
-  $('#text_toggle').click(function() {
-    $('#text_toggle').text()
-    $('#inst_desc').toggle()
-    if ($('#text_toggle').text() == "hide") {
-      $('#text_toggle').text("Click to show").addClass("hide_toggle")
-      $('.instruction').addClass("hide_toggle").css({
-        "width": "15%"
-      })
-    } else {
-      $('#text_toggle').text("hide").removeClass("hide_toggle")
-      $('.instruction').removeClass("hide_toggle").css({
-        "width": "95%"
-      })
-    }
   })
 
   // SCROLL ARROW OPACITY
@@ -96,7 +80,25 @@ $(document).ready(function () {
     // SET ARROW OPACITY BASED ON SCROLL POSITION
     // NO SCROLLING = 1, HALFWAY UP THE PAGE = 0
     $('.arrow-wrap').css('opacity', position)
-    $('.instruction').css('opacity', position * -5.5)
+    $('#instructions-container').css('opacity', 1 - position)
+  })
+
+  // TOGGLE INSTRUCTIONS VISIBILITY
+  $('#instructions-toggle').click(function () {
+    // FADE OUT EVERYTHING
+    $('#instructions-container').fadeOut(500, 'swing', function () {
+      // HIDE / SHOW CONTENT
+      // AND CHANGE TOGGLE TEXT
+      $('#instructions-content').toggle()
+      instructionsHidden = !instructionsHidden
+      if (instructionsHidden) {
+        $('#instructions-toggle').text('show instructions')
+      } else {
+        $('#instructions-toggle').text('hide')
+      };
+    })
+    // FADE EVERYTHING BACK IN
+    $('#instructions-container').fadeIn(500, 'swing')
   })
 
   // CREATE D3 FORCE LAYOUT

@@ -42,9 +42,14 @@ h1, h3 {
   text-transform: uppercase;
 }
 
-h3, h4, #main_desc {
+h3, h4, p {
   color: rgb(200, 200, 215);
   letter-spacing: 4px;
+}
+
+p {
+  text-align: center;
+  padding-top: 25px;
 }
 
 h4 {
@@ -55,9 +60,28 @@ h4 {
   margin-left: 5px;
 }
 
-#main_desc {
+#instructions-container {
+  position: absolute;
+  margin-left: 15px;
   text-align: center;
-  padding-top: 25px;
+  padding: 0 3em 0 3em;
+  width: 100vw;
+  bottom: 14px;
+  opacity: 0;
+}
+
+#instructions, #instructions-toggle {
+  display: inline-block;
+  letter-spacing: 1px;
+  line-height: normal;
+  font-size: 15px;
+}
+
+#instructions-toggle {
+  cursor: pointer;
+  font-style: italic;
+  color: rgb(200, 200, 215);
+  text-decoration: underline;
 }
 
 header, footer {
@@ -250,27 +274,4 @@ footer {
 #parallax-footer {
   transform: none;
   z-index: -1;
-}
-
-.instruction {
-  display: inline-block;
-  position: absolute;
-  width: 95%;
-  bottom: 0;
-  left: 0;
-  color: rgb(200, 200, 215);
-  opacity: 0;
-  margin: 0 0 0 35px;
-  padding: 5px 15px;
-  text-align: center;
-}
-
-#inst_desc {
-  letter-spacing: 0;
-  font-size: 15px;
-}
-
-.hide_toggle {
-  color: rgb(200, 200, 215);
-  left: calc(100vw * 0.4)
 }
