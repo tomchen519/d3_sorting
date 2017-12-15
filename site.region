@@ -66,12 +66,13 @@
               <div id="instructions-container">
                 <p id="instructions">
                   <span id="instructions-content">
-                    Posts are organized by owner, brand, and category. Click on
-                    a bubble to see the brands, categories, or posts it contains.
-                    Larger bubbles represent higher engagement. Hover your mouse
-                    over a bubble to see the engagement rate (total engagements / following)
-                    for that brand, category, or post. You can also click on a
-                    post to view the original IG image and caption.
+                    Posts are organized by owner, brand, and category. Drag to
+                    move a bubble or click to show / hide the brands, categories,
+                    or posts it contains. Larger bubbles represent higher
+                    engagement. Hover your mouse over a bubble to see the
+                    engagement rate (total engagements / following) for that
+                    brand, category, or post. You can also click on a post to
+                    view the original IG image and caption.
                   </span>
                   <a id="instructions-toggle">hide</a>
                 </p>
