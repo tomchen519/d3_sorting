@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Instagram Web | Force layout with images</title>
+
+    <!-- COLORBOX AND BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/colorbox.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- JQUERY, BOOTSTRAP, COLORBOX, AND D3 LIBRARIES -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script defer src="js/jquery.colorbox-min.js" charset="utf-8"></script>
+    <script defer src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script defer src="js/index.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <script>
+      var regEx = /firefox\/([^"]+)/g
+      var version = 50
+      var userAgent = navigator.userAgent.toLowerCase()
+      if (userAgent.indexOf('firefox/') > -1) {
+        var userVer = regEx.exec(userAgent)[1]
+        if (userVer < version) {
+          console.log(navigator.userAgent)
+          window.alert(
+            'Please update your browser' +
+            '\nThe application will not work properly'
+          )
+        };
+      };
+    </script>
+
+    <div class="parallax">
+      <div id="parallax-1" class="parallax-group">
+        <div id="parallax-header" class="parallax-layer parallax-layer-back"></div>
+
+        <div class="parallax-layer parallax-layer-base">
+
+          <!-- HEADER ROW -->
+          <div class="row" id="header-row">
+            <header>
+              <div class="col-xs-8 col-xs-offset-2" id="header-section">
+                <h1>clique instagram web</h1>
+                <h3>an AI powered view of social performance</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Duis et urna sit amet nulla porta venenatis. Integer interdum et
+                  nisl sit amet eleifend. Mauris ut fringilla magna,
+                  sed sollicitudin nibh.
+                </p>
+
+                <!-- SCROLL ARROW -->
+                <div class="arrow-wrap" href="#d3-layout-container">
+                  <text class="hint">Click to Explore</text>
+                  <span class="arrow"></span>
+                </div>
+              </div>
+            </header>
+          </div>
+
+          <!-- VISUALIZATION ROW -->
+          <div class="row" id="layout-row">
+            <div class="col-xs-12" id="d3-layout-container"></div>
+          </div>
+
+          <!-- FOOTER ROW -->
+          <div id="footer-row">
+            <footer>
+              <div class="col-xs-12" id="footer-section">
+                <a href="#" id="clique-intelligence">
+                  <img class="footer-image" src="img/clique_logo_white.png"></img>
+                  <h4>Intelligence</h4>
+                </a>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="parallax-footer" class="parallax-layer parallax-layer-back"></div>
+  </body>
+</html>
