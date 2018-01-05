@@ -94,7 +94,7 @@
           <div id="footer-row">
             <footer>
               <div class="col-xs-12" id="footer-section">
-                <a href="#" id="clique-intelligence">
+                <a href="/" id="clique-intelligence">
                   <img class="footer-image" src="assets/images/clique_logo_white.png"></img>
                   <h4>INTELLIGENCE</h4>
                 </a>
