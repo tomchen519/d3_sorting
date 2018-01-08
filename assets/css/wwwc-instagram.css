@@ -35,21 +35,22 @@ body {
 }
 
 h1, h3 {
-  color: rgb(240, 240, 255);
+  color: rgb(255, 255, 255);
   text-align: center;
-  font-weight: lighter;
+  font-weight: 600;
   letter-spacing: 10px;
   text-transform: uppercase;
 }
 
 h3, h4, h5, p {
-  color: rgb(240, 240, 255);
+  color: rgb(255, 255, 255);
   letter-spacing: 4px;
 }
 
 p {
   text-align: center;
   padding-top: 25px;
+  font-weight: 400;
 }
 
 h4, h5 {
@@ -89,7 +90,7 @@ h5 {
 #instructions-toggle {
   cursor: pointer;
   font-style: italic;
-  color: rgb(200, 200, 215);
+  color: rgb(200, 200, 200);
   text-decoration: underline;
 }
 
@@ -218,7 +219,7 @@ footer {
   height: 4em;
   border-style: solid;
   border-width: 0 0.2em 0.2em 0;
-  border-color: rgb(240, 240, 255);
+  border-color: rgb(255, 255, 255);
   transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
@@ -231,7 +232,7 @@ footer {
   top: 1.5em;
   font-size: 10px;
   letter-spacing: 2px;
-  color: rgb(240, 240, 255);
+  color: rgb(255, 255, 255);
   opacity: 0;
 }
 
