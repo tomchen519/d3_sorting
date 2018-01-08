@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'Futura URW';
-    src: url('//fonts.cliqueimg.com/futura-book.woff2') format('woff2'),url('//fonts.cliqueimg.com/futura-book.woff') format('woff');
-    font-style: normal;
-}
 
 #cboxOverlay { opacity: 0.8 !important; }
 .EmbedFrame { padding-bottom: 0 !important; }
@@ -25,7 +20,7 @@ html {
 }
 
 body {
-  font-family: 'Futura URW';
+  font-family: 'Futura PT';
   line-height: 160%;
   font-size: 16px;
   padding: 0px;
@@ -50,14 +45,15 @@ h3, h4, h5, p {
 p {
   text-align: center;
   padding-top: 25px;
-  font-weight: 400;
+  font-weight: 100;
+  letter-spacing: 2px;
 }
 
 h4, h5 {
   display: inline-block;
   vertical-align: middle;
   font-size: 24px;
-  padding-top: 6px;
+  padding-top: 3px;
   margin-left: 5px;
 }
 
@@ -118,6 +114,7 @@ footer {
   width: 90px;
   display: inline-block;
   vertical-align: middle;
+  padding-top: 4px;
 }
 
 #header-section, #footer-section{
