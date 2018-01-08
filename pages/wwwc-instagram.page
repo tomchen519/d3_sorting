@@ -46,6 +46,7 @@
           <div class="row" id="header-row">
             <header>
               <div class="col-xs-8 col-xs-offset-2" id="header-section">
+                <img id="header-image" src="assets/images/WWW_Target_Logo_White.png"></img>
                 <h1>clique visual intelligence</h1>
                 <h3>a categorical view of top performing instagram posts</h3>
                 <p id="description">

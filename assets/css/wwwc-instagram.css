@@ -93,6 +93,13 @@ h5 {
   text-decoration: underline;
 }
 
+#header-image {
+  width: 200px;
+  display: block;
+  margin: auto;
+  padding-bottom: 15px;
+}
+
 header, footer {
   position: relative;
   height: 90vh;
