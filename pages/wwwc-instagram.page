@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="assets/css/colorbox.css">
 
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/wwwc-instagram.css">
 
     <!-- JQUERY, BOOTSTRAP, COLORBOX, AND D3 LIBRARIES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
