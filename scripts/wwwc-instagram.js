@@ -16,7 +16,7 @@ var instructionsHidden = false
 const DATA_FILE = '/assets/data/wwwc-data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const BASE_IMAGE_URL = 'https://scontent-lax3-2.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/'
-const RATE_MULTIPIER = 300
+const RATE_MULTIPIER = 100
 const DEFAULT_RADIUS = 30
 const DEFAULT_FILL = '#fff'
 const DEFAULT_LINK_DISTANCE = 200
@@ -26,7 +26,7 @@ const OVERLAY_OPACITY = 0.5
 const TEXT_OVERLAY_OPACITY = 0.9
 const FOREIGN_OBJ_SIZE = 100
 const MAX_RADIUS = 75
-const TOGGLE_LEVEL = 0
+const TOGGLE_LEVEL = -1
 
 // DISABLE SCROLLING WHILE
 // VIEWING COLORBOX OVERLAY
@@ -245,9 +245,6 @@ function update () {
   })
 
   .on('mouseenter', function (d) {
-    // IGNORE EVENTS ON PARENT NODES
-    if (d.level <= 0) { return }
-
     // RE-APPEND ELEMENT SO IT DISPLAYS ON TOP
     this.parentNode.appendChild(this)
     var element = d3.select(this)
@@ -255,9 +252,7 @@ function update () {
   })
 
   .on('mouseleave', function (d) {
-    // IGNORE EVENTS ON PARENT NODES
-    if (d.level <= 0) { return }
-
+    // SHRINK ELEMENT TO ORIGINAL SIZE
     var element = d3.select(this)
     shrinkElement(element)
   })
@@ -267,7 +262,7 @@ function update () {
     .append('svg:text')
     .attr('class', 'overlay-text')
     .text(function (d) {
-        return (d.engage_rate * 100).toFixed(2) + '%'
+      return (d.engage_rate * 100).toFixed(2) + '%'
     })
     // .text(function (d) {
     //   if (d.level > 0) {
@@ -290,13 +285,10 @@ function update () {
   categoryWrapper.append('xhtml:text')
     .attr('class', 'category-text')
     .text(function (d) {
+      if (d.level !== 2) {
         return d.name.replace(/-/g, '\n')
+      };
     })
-    // .text(function (d) {
-    //   if (d.level === 2) {
-    //     return d.name.replace(/-/g, '\n')
-    //   };
-    // })
 
   // EXIT ANY OLD NODES
   node.exit().remove()
@@ -432,9 +424,11 @@ function shrinkElement (element) {
  */
 function getLinkDistance (d) {
   if (d.source.level === -1) {
-    return DEFAULT_LINK_DISTANCE * 2
-  } else if (d.source.level === 2) {
+    return DEFAULT_LINK_DISTANCE
+  } else if (d.source.level === 1) {
     return getCircleRadius(d)
+  } else if (d.source.level === 0) {
+    return DEFAULT_LINK_DISTANCE / 2
   } else {
     return DEFAULT_LINK_DISTANCE - (d.source.level * 90)
   }
@@ -444,10 +438,12 @@ function getLinkDistance (d) {
  * SETS NODE CHARGE BASED ON LEVEL
  */
 function getNodeCharge (d) {
-  if (d.level === 0) {
-    return DEFAULT_CHARGE
-  } else if (d.level === 3) {
+  if (d.level === -1) {
+    return DEFAULT_CHARGE * 4
+  } else if (d.level === 2) {
     return (d.level + 1) * DEFAULT_CHARGE
+  } else if (d.level === 0) {
+    return DEFAULT_CHARGE * 2
   } else {
     return Math.pow(d.level, 3) * DEFAULT_CHARGE
   }
@@ -473,12 +469,10 @@ function getCircleFill (d) {
   if (d.image_url) {
     // RETURN REFERENCE TO PATTERN WITH IMAGE
     return 'url(#' + d.post_id + '-bg-image)'
-  }
-  // else if (d.level === -1) {
+  // } else if (d.level === -1) {
   //   // RETURN NO FILL
   //   return 'none'
-  // }
-  else {
+  } else {
     // RETURN SOLID FILL
     return DEFAULT_FILL
   }
@@ -490,7 +484,7 @@ function getCircleFill (d) {
  */
 function getCircleRadius (d) {
   if (d.engage_rate) {
-    return Math.sqrt(d.engage_rate) * RATE_MULTIPIER
+    return Math.cbrt(d.engage_rate) * RATE_MULTIPIER
   } else {
     return DEFAULT_RADIUS
   }

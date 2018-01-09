@@ -145,11 +145,11 @@ footer {
   stroke-opacity: 0.1;
 }
 
-.edge.level_-1, .edge.level_2 {
+.edge.level_1 {
   stroke: none;
 }
 
-.edge.level_1 {
+.edge.level_0 {
   stroke-dasharray: 1, 5;
 }
 
@@ -160,9 +160,9 @@ footer {
   cursor: pointer;
 }
 
-.image-circle.level_-1 {
+/* .image-circle.level_-1 {
   stroke: none;
-}
+} */
 
 .circle-overlay {
   fill: black;
