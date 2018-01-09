@@ -16,7 +16,7 @@ var instructionsHidden = false
 const DATA_FILE = '/assets/data/wwwc-data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const BASE_IMAGE_URL = 'https://scontent-lax3-2.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/'
-const RATE_MULTIPIER = 100
+const RATE_MULTIPIER = 15
 const DEFAULT_RADIUS = 30
 const DEFAULT_FILL = '#fff'
 const DEFAULT_LINK_DISTANCE = 200
@@ -233,9 +233,6 @@ function update () {
   // TOGGLE CHILDREN AND DISPLAY
   // EMBEDED POST ON CLICK
   node.on('click', function (d) {
-    // IGNORE EVENTS ON PARENT NODES
-    // if (d.level === -1) { return }
-
     // PREVENT COLLAPSE ON DRAG
     if (d3.event.defaultPrevented) { return }
 
@@ -264,11 +261,6 @@ function update () {
     .text(function (d) {
       return (d.engage_rate * 100).toFixed(2) + '%'
     })
-    // .text(function (d) {
-    //   if (d.level > 0) {
-    //     return (d.engage_rate * 100).toFixed(2) + '%'
-    //   }
-    // })
 
   // ADD CATEOGORY TEXT
   var categoryText = nodeEnter
@@ -426,14 +418,9 @@ function getLinkDistance (d) {
   if (d.source.level === -1) {
     return DEFAULT_LINK_DISTANCE
   } else if (d.source.level === 1) {
-    console.log(d.target)
-    // console.log(getCircleRadius(d.target.engage_rate))
-    // console.log(d.source.engage_rate)
-    // console.log(getCircleRadius(d.source.engage_rate))
-    // console.log(getCircleRadius(d.target.engage_rate))
     return getCircleRadius(d.target)
   } else if (d.source.level === 0) {
-    return DEFAULT_LINK_DISTANCE / 1.5
+    return DEFAULT_LINK_DISTANCE / 2
   } else {
     return DEFAULT_LINK_DISTANCE
   }
@@ -444,13 +431,11 @@ function getLinkDistance (d) {
  */
 function getNodeCharge (d) {
   if (d.level === -1) {
-    return DEFAULT_CHARGE * 4
-  } else if (d.level === 2) {
-    return (d.level + 1) * DEFAULT_CHARGE
+    return DEFAULT_CHARGE
   } else if (d.level === 0) {
     return DEFAULT_CHARGE * 2
   } else {
-    return Math.pow(d.level, 3) * DEFAULT_CHARGE
+    return DEFAULT_CHARGE * 3
   }
 };
 
@@ -474,9 +459,6 @@ function getCircleFill (d) {
   if (d.image_url) {
     // RETURN REFERENCE TO PATTERN WITH IMAGE
     return 'url(#' + d.post_id + '-bg-image)'
-  // } else if (d.level === -1) {
-  //   // RETURN NO FILL
-  //   return 'none'
   } else {
     // RETURN SOLID FILL
     return DEFAULT_FILL
@@ -489,7 +471,7 @@ function getCircleFill (d) {
  */
 function getCircleRadius (d) {
   if (d.engage_rate) {
-    return Math.cbrt(d.engage_rate) * RATE_MULTIPIER
+    return Math.log(d.engage_rate * 100 + 1) * RATE_MULTIPIER
   } else {
     return DEFAULT_RADIUS
   }
