@@ -13,7 +13,7 @@ var height
 var instructionsHidden = false
 
 // OTHER CONSTANT VALUES / SETTINGS
-const DATA_FILE = '/assets/data/owned_competitive.json'
+const DATA_FILE = '/assets/data/wwwc-data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const BASE_IMAGE_URL = 'https://scontent-lax3-2.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/'
 const RATE_MULTIPIER = 300
@@ -234,7 +234,7 @@ function update () {
   // EMBEDED POST ON CLICK
   node.on('click', function (d) {
     // IGNORE EVENTS ON PARENT NODES
-    if (d.level === -1) { return }
+    // if (d.level === -1) { return }
 
     // PREVENT COLLAPSE ON DRAG
     if (d3.event.defaultPrevented) { return }
@@ -267,10 +267,13 @@ function update () {
     .append('svg:text')
     .attr('class', 'overlay-text')
     .text(function (d) {
-      if (d.level > 0) {
         return (d.engage_rate * 100).toFixed(2) + '%'
-      }
     })
+    // .text(function (d) {
+    //   if (d.level > 0) {
+    //     return (d.engage_rate * 100).toFixed(2) + '%'
+    //   }
+    // })
 
   // ADD CATEOGORY TEXT
   var categoryText = nodeEnter
@@ -287,10 +290,13 @@ function update () {
   categoryWrapper.append('xhtml:text')
     .attr('class', 'category-text')
     .text(function (d) {
-      if (d.level === 2) {
         return d.name.replace(/-/g, '\n')
-      };
     })
+    // .text(function (d) {
+    //   if (d.level === 2) {
+    //     return d.name.replace(/-/g, '\n')
+    //   };
+    // })
 
   // EXIT ANY OLD NODES
   node.exit().remove()
@@ -381,7 +387,7 @@ function enlargeElement (element) {
     .style('font-size', '30px')
     .style('fill-opacity', TEXT_OVERLAY_OPACITY)
     .style('dominant-baseline', function (d) {
-      if (d.level === 2) { return 'auto' } else { return 'middle' }
+      if ([0, 1].indexOf(d.level) > -1) { return 'auto' } else { return 'middle' }
     })
 
   // TRANSITION CATEGORY TEXT COLOR
@@ -467,10 +473,12 @@ function getCircleFill (d) {
   if (d.image_url) {
     // RETURN REFERENCE TO PATTERN WITH IMAGE
     return 'url(#' + d.post_id + '-bg-image)'
-  } else if (d.level === -1) {
-    // RETURN NO FILL
-    return 'none'
-  } else {
+  }
+  // else if (d.level === -1) {
+  //   // RETURN NO FILL
+  //   return 'none'
+  // }
+  else {
     // RETURN SOLID FILL
     return DEFAULT_FILL
   }

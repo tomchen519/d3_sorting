@@ -16,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <squarespace:script defer src="jquery.colorbox-min.js" charset="utf-8"></script>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <squarespace:script defer src="index.js" charset="utf-8"></script>
+    <squarespace:script defer src="wwwc-instagram.js" charset="utf-8"></script>
   </head>
 
   <body>
