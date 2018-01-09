@@ -426,11 +426,16 @@ function getLinkDistance (d) {
   if (d.source.level === -1) {
     return DEFAULT_LINK_DISTANCE
   } else if (d.source.level === 1) {
-    return getCircleRadius(d)
+    console.log(d.target)
+    // console.log(getCircleRadius(d.target.engage_rate))
+    // console.log(d.source.engage_rate)
+    // console.log(getCircleRadius(d.source.engage_rate))
+    // console.log(getCircleRadius(d.target.engage_rate))
+    return getCircleRadius(d.target)
   } else if (d.source.level === 0) {
-    return DEFAULT_LINK_DISTANCE / 2
+    return DEFAULT_LINK_DISTANCE / 1.5
   } else {
-    return DEFAULT_LINK_DISTANCE - (d.source.level * 90)
+    return DEFAULT_LINK_DISTANCE
   }
 };
 
