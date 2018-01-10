@@ -15,7 +15,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.14682442469619678,
-                    "name": "spring",
+                    "name": "🌷",
                     "children": [
                         {
                             "category": "spring",
@@ -121,7 +121,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.2210075858079767,
-                    "name": "summer",
+                    "name": "☀️",
                     "children": [
                         {
                             "category": "summer",
@@ -216,7 +216,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.1416562372541821,
-                    "name": "fall",
+                    "name": "🍁",
                     "children": [
                         {
                             "category": "fall",
@@ -322,7 +322,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.10426377088034436,
-                    "name": "winter",
+                    "name": "❄️",
                     "children": [
                         {
                             "category": "winter",
@@ -470,7 +470,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.03113013205416385,
-                    "name": "spring",
+                    "name": "🌷",
                     "children": [
                         {
                             "category": "spring",
@@ -576,7 +576,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.037922118342620215,
-                    "name": "summer",
+                    "name": "☀️",
                     "children": [
                         {
                             "category": "summer",
@@ -693,7 +693,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.043775123778874735,
-                    "name": "fall",
+                    "name": "🍁",
                     "children": [
                         {
                             "category": "fall",
@@ -777,7 +777,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.01207453978685276,
-                    "name": "winter",
+                    "name": "❄️",
                     "children": [
                         {
                             "category": "winter",
@@ -870,7 +870,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.02501048887764966,
-                    "name": "spring",
+                    "name": "🌷",
                     "children": [
                         {
                             "category": "spring",
@@ -921,7 +921,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.015534201675510234,
-                    "name": "summer",
+                    "name": "☀️",
                     "children": [
                         {
                             "category": "summer",
@@ -972,7 +972,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.01642022213639849,
-                    "name": "fall",
+                    "name": "🍁",
                     "children": [
                         {
                             "category": "fall",
@@ -1034,7 +1034,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.01495986456179024,
-                    "name": "winter",
+                    "name": "❄️",
                     "children": [
                         {
                             "category": "winter",
