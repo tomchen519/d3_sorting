@@ -1,20 +1,20 @@
 {
     "level": -1,
-    "engage_rate": 0.06754822582104668,
+    "engage_rate": 0.06112226435785079,
     "post_id": "ugc",
     "acct_type": "ugc",
     "name": "UGC",
     "children": [
         {
             "level": 0,
-            "engage_rate": 0.15343800465967497,
+            "engage_rate": 0.10471114568789831,
             "post_id": "micro",
             "name": "micro",
             "acct_type": "micro",
             "children": [
                 {
                     "level": 1,
-                    "engage_rate": 0.14682442469619678,
+                    "engage_rate": 0.06028604478231208,
                     "name": "🌷",
                     "children": [
                         {
@@ -120,7 +120,7 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.2210075858079767,
+                    "engage_rate": 0.13706489213739864,
                     "name": "☀️",
                     "children": [
                         {
@@ -215,7 +215,7 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.1416562372541821,
+                    "engage_rate": 0.15562792785371948,
                     "name": "🍁",
                     "children": [
                         {
@@ -321,7 +321,7 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.10426377088034436,
+                    "engage_rate": 0.07827322044305528,
                     "name": "❄️",
                     "children": [
                         {
@@ -462,7 +462,7 @@
         },
         {
             "level": 0,
-            "engage_rate": 0.03122547849062789,
+            "engage_rate": 0.03182848535981119,
             "post_id": "power_mid",
             "name": "power middle",
             "acct_type": "power_mid",
@@ -862,7 +862,7 @@
         },
         {
             "level": 0,
-            "engage_rate": 0.017981194312837158,
+            "engage_rate": 0.018017090382444655,
             "post_id": "celebrity",
             "name": "celebrity",
             "acct_type": "celebrity",
@@ -920,7 +920,7 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.015534201675510234,
+                    "engage_rate": 0.015599137634895871,
                     "name": "☀️",
                     "children": [
                         {
@@ -971,7 +971,7 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.01642022213639849,
+                    "engage_rate": 0.01619106927671233,
                     "name": "🍁",
                     "children": [
                         {
