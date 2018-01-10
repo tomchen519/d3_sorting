@@ -233,12 +233,16 @@ function update () {
   // TOGGLE CHILDREN AND DISPLAY
   // EMBEDED POST ON CLICK
   node.on('click', function (d) {
-    // PREVENT COLLAPSE ON DRAG
-    if (d3.event.defaultPrevented) { return }
-
-    var element = d3.select(this)
-    toggleChildren(d, element)
-    displayModal(d, element)
+    // PREVENT COLLAPSE AND SCROLLING ON DRAG
+    if (d3.event.defaultPrevented) {
+      $('body').css('overflow', 'hidden')
+    } else {
+      var element = d3.select(this)
+      toggleChildren(d, element)
+      displayModal(d, element)
+    };
+    // RE-ENABLE SCROLLING
+    $('body').css('overflow', 'auto')
   })
 
   .on('mouseenter', function (d) {
