@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Clique Intelligence</title>
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="browser icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://use.typekit.net/ydd3xcq.css">
   </head>
 
