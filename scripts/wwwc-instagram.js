@@ -249,14 +249,14 @@ function update () {
     $('body').css('overflow', 'auto')
   })
 
-  .on('mouseenter', function (d) {
+  node.on('mouseenter', function (d) {
     // RE-APPEND ELEMENT SO IT DISPLAYS ON TOP
     this.parentNode.appendChild(this)
     var element = d3.select(this)
     enlargeElement(element)
   })
 
-  .on('mouseleave', function (d) {
+  node.on('mouseleave', function (d) {
     // SHRINK ELEMENT TO ORIGINAL SIZE
     var element = d3.select(this)
     shrinkElement(element)
