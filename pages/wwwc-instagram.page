@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Clique Intelligence | WWWC Instagram Viz</title>
 
-    <!-- COLORBOX AND BOOTSTRAP CSS -->
+    COLORBOX AND BOOTSTRAP CSS
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/colorbox.css">
 
-    <!-- CUSTOM CSS -->
+    CUSTOM CSS
     <link rel="stylesheet" href="assets/css/wwwc-instagram.css">
 
-    <!-- JQUERY, BOOTSTRAP, COLORBOX, AND D3 LIBRARIES -->
+    JQUERY, BOOTSTRAP, COLORBOX, AND D3 LIBRARIES
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <squarespace:script defer src="jquery.colorbox-min.js" charset="utf-8"/>
@@ -19,7 +19,7 @@
     <squarespace:script defer src="wwwc-instagram.js" charset="utf-8"/>
   </head>
 
-  <body>
+  <body> -->
     <script>
       var regEx = /firefox\/([^"]+)/g
       var version = 50
@@ -106,5 +106,5 @@
       </div>
     </div>
     <div id="parallax-footer" class="parallax-layer parallax-layer-back"></div>
-  </body>
-</html>
+  <!-- </body>
+</html> -->
