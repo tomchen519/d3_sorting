@@ -10,14 +10,14 @@ var root
 var force
 var width
 var height
+var maxRate
+var minRate
 var instructionsHidden = false
 
 // OTHER CONSTANT VALUES / SETTINGS
 const DATA_FILE = '/assets/data/wwwc-data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const BASE_IMAGE_URL = 'https://scontent-lax3-2.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/'
-const RATE_MULTIPIER = 15
-const DEFAULT_RADIUS = 30
 const DEFAULT_FILL = '#fff'
 const DEFAULT_LINK_DISTANCE = 200
 const DEFAULT_CHARGE = -750
@@ -25,7 +25,11 @@ const CHARGE_DISTANCE = 500
 const OVERLAY_OPACITY = 0.5
 const TEXT_OVERLAY_OPACITY = 0.9
 const FOREIGN_OBJ_SIZE = 100
-const MAX_RADIUS = 75
+const DEFAULT_RADIUS = 30
+const IMAGE_HOVER_RADIUS = 120
+const HOVER_RADIUS = 80
+const MAX_RADIUS = 90
+const MIN_RADIUS = 10
 const TOGGLE_LEVEL = -1
 
 // DISABLE SCROLLING WHILE
@@ -363,11 +367,11 @@ function boundedUpdate (d, axis, coordType) {
 function enlargeElement (element) {
   // ENLARGE IMAGE
   element.selectAll('.image-circle').transition().ease('linear')
-    .attr('r', MAX_RADIUS)
+    .attr('r', function (d) { return getHoverRadius(d) })
 
   // ENLARGE OVERLAY
   element.selectAll('.circle-overlay').transition().ease('linear')
-    .attr('r', MAX_RADIUS)
+    .attr('r', function (d) { return getHoverRadius(d) })
     .style('fill-opacity', OVERLAY_OPACITY)
 
   // ENLARGE OVERLAY TEXT AND TRANSITION CATEGORY TEXT
@@ -475,11 +479,24 @@ function getCircleFill (d) {
  */
 function getCircleRadius (d) {
   if (d.engage_rate) {
-    return Math.log(d.engage_rate * 100 + 1) * RATE_MULTIPIER
+    return ((MAX_RADIUS - MIN_RADIUS) * (d.engage_rate - minRate) /
+            (maxRate - minRate)) + MIN_RADIUS
   } else {
     return DEFAULT_RADIUS
   }
-}
+};
+
+/*
+ * SET DIFFERENT HOVER RADIUS FOR
+ * IMAGE NODES AND CATEGORY NODES
+ */
+function getHoverRadius (d) {
+  if (d.level === 2) {
+    return IMAGE_HOVER_RADIUS
+  } else {
+    return HOVER_RADIUS
+  }
+};
 
 /*
  * TOGGLE CHILDREN ON CLICK
@@ -522,9 +539,20 @@ function flatten (root) {
     if (node.children) {
       node.children.forEach(recurse)
     };
+
+    // ADD NODE ID
     if (!node.id) {
       node.id = ++i
     };
+
+    // SET MAX AND MIN ENGAGEMENT RATES
+    if (!maxRate || node.engage_rate > maxRate) {
+      maxRate = node.engage_rate
+    } else if (!minRate || node.engage_rate < minRate) {
+      minRate = node.engage_rate
+    };
+
+    // ADD NODE TO FLAT ARRAY
     nodes.push(node)
   };
 
