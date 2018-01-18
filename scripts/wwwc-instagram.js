@@ -31,6 +31,7 @@ const HOVER_RADIUS = 80
 const MAX_RADIUS = 90
 const MIN_RADIUS = 10
 const TOGGLE_LEVEL = -1
+const DOUBLE_CLICK_TIMEOUT = 300
 
 // DISABLE SCROLLING WHILE
 // VIEWING COLORBOX OVERLAY
@@ -232,36 +233,6 @@ function update () {
     .attr('class', 'circle-overlay')
     .attr('r', function (d) { return getCircleRadius(d) })
 
-  // SET EVENTS ON NODE CIRCLES
-
-  // TOGGLE CHILDREN AND DISPLAY
-  // EMBEDED POST ON CLICK
-  node.on('click', function (d) {
-    // PREVENT COLLAPSE AND SCROLLING ON DRAG
-    if (d3.event.defaultPrevented) {
-      $('body').css('overflow', 'hidden')
-    } else {
-      var element = d3.select(this)
-      toggleChildren(d, element)
-      displayModal(d, element)
-    };
-    // RE-ENABLE SCROLLING
-    $('body').css('overflow', 'auto')
-  })
-
-  node.on('mouseenter', function (d) {
-    // RE-APPEND ELEMENT SO IT DISPLAYS ON TOP
-    this.parentNode.appendChild(this)
-    var element = d3.select(this)
-    enlargeElement(element)
-  })
-
-  node.on('mouseleave', function (d) {
-    // SHRINK ELEMENT TO ORIGINAL SIZE
-    var element = d3.select(this)
-    shrinkElement(element)
-  })
-
   // ADD ENGAGEMENT RATE TEXT
   var rateText = nodeEnter
     .append('svg:text')
@@ -289,6 +260,65 @@ function update () {
         return d.name.replace(/-/g, '\n')
       };
     })
+
+  // SET EVENTS ON NODES
+  var doubleClicked = false
+
+  // SHOW / HIDE ENGAGEMENT RATE ON SIGNLE CLICK
+  var singleClickHandler = function (d, element) {
+    if (d.enlarged) {
+      shrinkElement(element)
+      d.enlarged = false
+    } else {
+      enlargeElement(element)
+      d.enlarged = true
+    };
+  }
+
+  // TOGGLE CHILDREN / SHOW POST ON DOUBLE CLICK
+  var doubleClickHandler = function (d, element) {
+    toggleChildren(d, element)
+    displayModal(d)
+  }
+
+  // PREVENT SCROLLING WHEN
+  // DRAGGING NODES ON TOUCH DEVICES
+  node.on('touchmove', function () {
+    $('.parallax').css('overflow-y', 'hidden')
+  })
+
+  // RE-ENABLE SCROLLING ON TOUCH END
+  .on('touchend', function () {
+    $('.parallax').css('overflow-y', 'auto')
+  })
+
+  // TOGGLE CHILDREN AND DISPLAY
+  // EMBEDED POST ON CLICK
+  .on('click', function (d) {
+    // RE-APPEND NODE TO DISPLAY ON TOP
+    var element = d3.select(this)
+    this.parentNode.appendChild(this)
+
+    // PREVENT CLICK HANLDERS FROM
+    // BEING CALLED ON MOUSE / TOUCHMOVE
+    if (d3.event.defaultPrevented) {
+      return
+    } else {
+      if (!doubleClicked) {
+        // START TIMEOUT FOR SINGLE CLICK
+        doubleClicked = window.setTimeout(function () {
+          singleClickHandler(d, element)
+          doubleClicked = false
+        }, DOUBLE_CLICK_TIMEOUT)
+      } else {
+        // CLEAR SINGLE CLICK TIMEOUT
+        // AND CALL DOUBLE CLICK HANDLER
+        window.clearTimeout(doubleClicked)
+        doubleClickHandler(d, this)
+        doubleClicked = false
+      };
+    };
+  })
 
   // EXIT ANY OLD NODES
   node.exit().remove()
@@ -511,8 +541,15 @@ function toggleChildren (d, element) {
     d.children = d._children
     d._children = null
   }
+
   // UPDATE VIS
   update()
+
+  // RE-APPEND ELEMENT IF
+  // IT EXISTS IN THE DOM
+  if (element) {
+    element.parentNode.appendChild(element)
+  };
 };
 
 /*
@@ -563,7 +600,7 @@ function flatten (root) {
 /*
  * DISPLAY IG POST FOR NODE CLICKED
  */
-function displayModal (d, element) {
+function displayModal (d) {
   if (d.post_url) {
     var instaEmbed = EMBED_URL
     var embedReqUrl = instaEmbed + d.post_id
