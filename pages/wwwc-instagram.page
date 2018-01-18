@@ -1,5 +1,4 @@
 <head>
-  <meta charset="utf-8">
   <title>Clique Intelligence | WWWC Instagram Viz</title>
 
   <!-- COLORBOX AND BOOTSTRAP CSS -->
@@ -70,12 +69,12 @@
             <div id="instructions-container">
               <p id="instructions">
                 <span id="instructions-content">
-                  Click the bubbles to reveal / hide the brands and categories
-                  inside each brand. Categories contain individual Instagram
-                  posts, represented as image bubbles, with their engagement
-                  rate viewable on mouse hover. Bubble size corresponds to
-                  engagement rate where the largest bubbles represent the most
-                  engaging posts. Click on a image bubble to reveal the entire post.
+                  This visualization organizes UGC by influencer tier and
+                  season. Single click any bubble to view it's engagement rate
+                  and expand it for a larger view. Engagement rate is also
+                  represented by bubble size. Double click a cateogry or image
+                  bubble to expand the content it contains or reveal the
+                  original instagram post.
                 </span>
                 <a id="instructions-toggle">hide</a>
               </p>
