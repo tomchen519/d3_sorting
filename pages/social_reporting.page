@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=800, user-scalable=0">
+    <title>Social Reporting</title>
+
+    <!-- COLORBOX AND BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/colorbox.css">
+    <link rel="stylesheet" href="assets/css/daterangepicker.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="assets/css/social_reporting.css">
+
+    <!-- JQUERY, BOOTSTRAP, COLORBOX, AND D3 LIBRARIES -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script defer src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <squarespace:script defer defer src="moment.min.js"></script>
+    <squarespace:script defer defer src="daterangepicker.js"></script>
+    <squarespace:script defer defer src="jquery.colorbox-min.js" charset="utf-8"></script>
+    <squarespace:script defer defer src="fisheye.js"></script>
+    <squarespace:script defer defer src="social_reporting.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <div id="header">
+        <div id="header-section">
+          <a href="#" id="clique-intelligence">
+            <img class="header-image" src="assets/images/clique_logo_white.png"></img>
+            <h4>Intelligence</h4>
+          </a>
+        </div>
+        <!-- CONTROLS -->
+        <div id="controls">
+          <div class="select_date" id='date_range'>
+            <span class="select_title">date range:</span>
+            <input name="daterange" />
+            <div></div>
+          </div>
+          <div class="select_component">
+            <span class="select_title">competitive set:</span>
+            <select class="competitive_set" id="select_comp">
+            </select>
+          </div>
+          <div class="select_component">
+            <span class="select_title">sort by:</span>
+            <select class="sort-by">
+              <option value="engage_rate">Engagement Rate</option>
+              <option value="comments">Total Comments</option>
+              <option value="likes">Total Likes</option>
+              <option value="brand">Brand</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="legend">
+        <div id="legend_stats"></div>
+      </div>
+    </header>
+
+    <div id="empty"></div>
+
+    <!-- VISUALIZATION ROW -->
+    <div id="layout-row">
+      <!-- <a name="top_performing"></a> -->
+      <div class="category" id="top_perform">
+        <span>Top Performing</span>
+        <a href="#bottom_perform" id="to_bottom" class="pointer">
+          <span id="point_to_bottom" class="glyphicon glyphicon-triangle-bottom"></span>
+        </a>
+        <span class="pointer_text" id="top_pointer"></span>
+      </div>
+      <div id="d3-layout-container1" class="visualize"></div>
+
+      <!-- <a name="bottom_performing"></a> -->
+      <div class="category" id="bottom_perform">
+        <span>Bottom Performing</span>
+        <a href="#top_perform" id="to_top" class="pointer">
+          <span id="point_to_top" class="glyphicon glyphicon-triangle-top"></span>
+        </a>
+        <span class="pointer_text" id="bottom_pointer"></span>
+      </div>
+      <div id="d3-layout-container2" class="visualize"></div>
+    </div>
+
+    <!-- FOOTER ROW -->
+    <!-- <div class="row" id="footer-row">
+      <footer>
+        <div class="col-xs-12" id="footer-section">
+          <a href="#" id="clique-intelligence">
+            <img class="footer-image" src="img/clique_logo_white.png"></img>
+            <h4>Intelligence</h4>
+          </a>
+        </div>
+      </footer>
+    </div> -->
+  </body>
+</html>
