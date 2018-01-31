@@ -230,18 +230,29 @@ function update () {
 
   // SET EVENTS ON NODE CIRCLES
 
+  // PREVENT SCROLLING WHEN
+  // DRAGGING NODES ON TOUCH DEVICES
+  node.on('touchmove', function () {
+    $('.parallax').css('overflow-y', 'hidden')
+  })
+
+  // RE-ENABLE SCROLLING ON TOUCH END
+  .on('touchend', function () {
+    $('.parallax').css('overflow-y', 'auto')
+  })
+
   // TOGGLE CHILDREN AND DISPLAY
   // EMBEDED POST ON CLICK
-  node.on('click', function (d) {
+  .on('click', function (d) {
     // IGNORE EVENTS ON PARENT NODES
     if (d.level === -1) { return }
 
     // PREVENT COLLAPSE ON DRAG
     if (d3.event.defaultPrevented) { return }
 
-    var element = d3.select(this)
-    toggleChildren(d, element)
-    displayModal(d, element)
+    // var element = d3.select(this)
+    toggleChildren(d, this)
+    displayModal(d)
   })
 
   .on('mouseenter', function (d) {
@@ -503,6 +514,12 @@ function toggleChildren (d, element) {
   }
   // UPDATE VIS
   update()
+
+  // RE-APPEND ELEMENT IF
+  // IT EXISTS IN THE DOM
+  if (element) {
+    element.parentNode.appendChild(element)
+  };
 };
 
 /*
@@ -542,7 +559,7 @@ function flatten (root) {
 /*
  * DISPLAY IG POST FOR NODE CLICKED
  */
-function displayModal (d, element) {
+function displayModal (d) {
   if (d.post_url) {
     var instaEmbed = EMBED_URL
     var embedReqUrl = instaEmbed + d.post_id

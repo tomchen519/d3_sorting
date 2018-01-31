@@ -1,110 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Clique Intelligence | Visual Intelligence</title>
+<head>
+  <title>Clique Intelligence | Visual Intelligence</title>
 
-    <!-- COLORBOX AND BOOTSTRAP CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/colorbox.css">
+  <!-- COLORBOX AND BOOTSTRAP CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/colorbox.css">
 
-    <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="assets/css/main.css">
+  <!-- CUSTOM CSS -->
+  <link rel="stylesheet" href="assets/css/main.css">
 
-    <!-- JQUERY, BOOTSTRAP, COLORBOX, AND D3 LIBRARIES -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <squarespace:script defer src="jquery.colorbox-min.js" charset="utf-8"></script>
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <squarespace:script defer src="index.js" charset="utf-8"></script>
-  </head>
+  <!-- JQUERY, BOOTSTRAP, COLORBOX, AND D3 LIBRARIES -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <squarespace:script defer src="jquery.colorbox-min.js" charset="utf-8"></script>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <squarespace:script defer src="index.js" charset="utf-8"></script>
+</head>
 
-  <body>
-    <script>
-      var regEx = /firefox\/([^"]+)/g
-      var version = 50
-      var userAgent = navigator.userAgent.toLowerCase()
-      if (userAgent.indexOf('firefox/') > -1) {
-        var userVer = regEx.exec(userAgent)[1]
-        if (userVer < version) {
-          console.log(navigator.userAgent)
-          window.alert(
-            'Please update your browser.\n' +
-            'The application may not work properly'
-          )
-        };
-      }
-    </script>
+<body>
+  <script>
+    var regEx = /firefox\/([^"]+)/g
+    var version = 50
+    var userAgent = navigator.userAgent.toLowerCase()
+    if (userAgent.indexOf('firefox/') > -1) {
+      var userVer = regEx.exec(userAgent)[1]
+      if (userVer < version) {
+        console.log(navigator.userAgent)
+        window.alert(
+          'Please update your browser.\n' +
+          'The application may not work properly'
+        )
+      };
+    }
+  </script>
 
-    <div id="loading"></div>
-    <div class="parallax">
-      <div id="parallax-1" class="parallax-group">
-        <div id="parallax-header" class="parallax-layer parallax-layer-back"></div>
-        <div class="parallax-layer parallax-layer-base">
+  <div id="loading"></div>
+  <div class="parallax">
+    <div id="parallax-1" class="parallax-group">
+      <div id="parallax-header" class="parallax-layer parallax-layer-back"></div>
+      <div class="parallax-layer parallax-layer-base">
 
-          <!-- HEADER ROW -->
-          <div class="row" id="header-row">
-            <header>
-              <div class="col-xs-8 col-xs-offset-2" id="header-section">
-                <h1>clique visual intelligence</h1>
-                <h3>a categorical view of top performing instagram posts</h3>
-                <p id="description">
-                  Below you'll find a new way to view the world of Instagram,
-                  through a Clique-powered data-driven lens. Explore the top
-                  performing content across our brands and competitive brands
-                  during fall 2017 by clicking into the floating nodes. Observe
-                  similarities and differences in types of high-performing
-                  content by noticing the relative size of the categories and
-                  images. Dive in for more detail by clicking down to the image
-                  and dig into the content and captions to see qualitative
-                  consumer feedback. And just like that, social insights brought
-                  to you by the Clique Intelligence team!
-                </p>
+        <!-- HEADER ROW -->
+        <div class="row" id="header-row">
+          <header>
+            <div class="col-xs-8 col-xs-offset-2" id="header-section">
+              <h1>clique visual intelligence</h1>
+              <h3>a categorical view of top performing instagram posts</h3>
+              <p id="description">
+                Below you'll find a new way to view the world of Instagram,
+                through a Clique-powered data-driven lens. Explore the top
+                performing content across our brands and competitive brands
+                during fall 2017 by clicking into the floating nodes. Observe
+                similarities and differences in types of high-performing
+                content by noticing the relative size of the categories and
+                images. Dive in for more detail by clicking down to the image
+                and dig into the content and captions to see qualitative
+                consumer feedback. And just like that, social insights brought
+                to you by the Clique Intelligence team!
+              </p>
 
-                <!-- SCROLL ARROW -->
-                <div class="arrow-wrap" href="#d3-layout-container">
-                  <text class="hint">Click to Explore</text>
-                  <span class="arrow"></span>
-                </div>
+              <!-- SCROLL ARROW -->
+              <div class="arrow-wrap" href="#d3-layout-container">
+                <text class="hint">Click to Explore</text>
+                <span class="arrow"></span>
               </div>
+            </div>
 
-              <!-- INSTRUCTIONS -->
-              <div id="instructions-container">
-                <p id="instructions">
-                  <span id="instructions-content">
-                    Click the bubbles to reveal / hide the brands and categories
-                    inside each brand. Categories contain individual Instagram
-                    posts, represented as image bubbles, with their engagement
-                    rate viewable on mouse hover. Bubble size corresponds to
-                    engagement rate where the largest bubbles represent the most
-                    engaging posts. Click on a image bubble to reveal the entire post.
-                  </span>
-                  <a id="instructions-toggle">hide</a>
-                </p>
-              </div>
-            </header>
-          </div>
+            <!-- INSTRUCTIONS -->
+            <div id="instructions-container">
+              <p id="instructions">
+                <span id="instructions-content">
+                  Click the bubbles to reveal / hide the brands and categories
+                  inside each brand. Categories contain individual Instagram
+                  posts, represented as image bubbles, with their engagement
+                  rate viewable on mouse hover. Bubble size corresponds to
+                  engagement rate where the largest bubbles represent the most
+                  engaging posts. Click on a image bubble to reveal the entire post.
+                </span>
+                <a id="instructions-toggle">hide</a>
+              </p>
+            </div>
+          </header>
+        </div>
 
-          <!-- VISUALIZATION ROW -->
-          <div class="row" id="layout-row">
-            <div class="col-xs-12" id="d3-layout-container"></div>
-          </div>
+        <!-- VISUALIZATION ROW -->
+        <div class="row" id="layout-row">
+          <div class="col-xs-12" id="d3-layout-container"></div>
+        </div>
 
-          <!-- FOOTER ROW -->
-          <div id="footer-row">
-            <footer>
-              <div class="col-xs-12" id="footer-section">
-                <a href="/" id="clique-intelligence">
-                  <img class="footer-image" src="assets/images/clique_logo_white.png"></img>
-                  <h4>INTELLIGENCE</h4>
-                </a>
-                <h5>Source: Instagram Fall 2017, Owned & Competitive Brands</h5>
-              </div>
-            </footer>
-          </div>
+        <!-- FOOTER ROW -->
+        <div id="footer-row">
+          <footer>
+            <div class="col-xs-12" id="footer-section">
+              <a href="/" id="clique-intelligence">
+                <img class="footer-image" src="assets/images/clique_logo_white.png">
+                <h4>INTELLIGENCE</h4>
+              </a>
+              <h5>Source: Instagram Fall 2017, Owned & Competitive Brands</h5>
+            </div>
+          </footer>
         </div>
       </div>
     </div>
-    <div id="parallax-footer" class="parallax-layer parallax-layer-back"></div>
-  </body>
-</html>
+  </div>
+  <div id="parallax-footer" class="parallax-layer parallax-layer-back"></div>
+</body>

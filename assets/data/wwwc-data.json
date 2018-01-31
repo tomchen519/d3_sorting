@@ -1,21 +1,21 @@
 {
     "level": -1,
-    "engage_rate": 0.06754822582104668,
+    "engage_rate": 0.06112226435785079,
     "post_id": "ugc",
     "acct_type": "ugc",
     "name": "UGC",
     "children": [
         {
             "level": 0,
-            "engage_rate": 0.15343800465967497,
+            "engage_rate": 0.10471114568789831,
             "post_id": "micro",
             "name": "micro",
             "acct_type": "micro",
             "children": [
                 {
                     "level": 1,
-                    "engage_rate": 0.14682442469619678,
-                    "name": "spring",
+                    "engage_rate": 0.06028604478231208,
+                    "name": "🌷",
                     "children": [
                         {
                             "category": "spring",
@@ -65,17 +65,6 @@
                             "category": "spring",
                             "tier": "micro",
                             "level": 2,
-                            "engagement": 3346,
-                            "engage_rate": 0.8325454093057975,
-                            "post_url": "https://www.instagram.com/p/BTelzdABdFl/",
-                            "post_id": "BTelzdABdFl",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/18160338_1620758574630976_7618534176442023936_n.jpg",
-                            "follower_count": 4019
-                        },
-                        {
-                            "category": "spring",
-                            "tier": "micro",
-                            "level": 2,
                             "engagement": 62,
                             "engage_rate": 0.009452660466534533,
                             "post_url": "https://www.instagram.com/p/BXdIktGhBrW/",
@@ -120,52 +109,19 @@
                             "category": "spring",
                             "tier": "micro",
                             "level": 2,
-                            "engagement": 1326,
-                            "engage_rate": 0.3466666666666667,
-                            "post_url": "https://www.instagram.com/p/BYJbuxtjw1e/",
-                            "post_id": "BYJbuxtjw1e",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/21042187_303012246829130_8496325728244072448_n.jpg",
-                            "follower_count": 3825
-                        },
-                        {
-                            "category": "spring",
-                            "tier": "micro",
-                            "level": 2,
                             "engagement": 184,
                             "engage_rate": 0.006829232082544631,
                             "post_url": "https://www.instagram.com/p/BSkNyhWADAq/",
                             "post_id": "BSkNyhWADAq",
                             "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/21149366_2385685924990742_1512961852752003072_n.jpg",
                             "follower_count": 26943
-                        },
-                        {
-                            "category": "spring",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 398,
-                            "engage_rate": 0.13989455184534272,
-                            "post_url": "https://www.instagram.com/p/BR4nPLQBp-P/",
-                            "post_id": "BR4nPLQBp-P",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/20905655_967081016764965_7842466615839948800_n.jpg",
-                            "follower_count": 2845
-                        },
-                        {
-                            "category": "spring",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 223,
-                            "engage_rate": 0.04703649019194263,
-                            "post_url": "https://www.instagram.com/p/BRW3rLPBWMQ/",
-                            "post_id": "BRW3rLPBWMQ",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/17076243_180789579091571_1296882593551089664_n.jpg",
-                            "follower_count": 4741
                         }
                     ]
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.2210075858079767,
-                    "name": "summer",
+                    "engage_rate": 0.13706489213739864,
+                    "name": "☀️",
                     "children": [
                         {
                             "category": "summer",
@@ -204,55 +160,11 @@
                             "category": "summer",
                             "tier": "micro",
                             "level": 2,
-                            "engagement": 730,
-                            "engage_rate": 0.10500575373993096,
-                            "post_url": "https://www.instagram.com/p/BUm7nH1AEB5/",
-                            "post_id": "BUm7nH1AEB5",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/18722353_1885496608372227_2046069836529795072_n.jpg",
-                            "follower_count": 6952
-                        },
-                        {
-                            "category": "summer",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 123,
-                            "engage_rate": 0.04405444126074499,
-                            "post_url": "https://www.instagram.com/p/BTFcvHAF3WY/",
-                            "post_id": "BTFcvHAF3WY",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/18011873_817786668376558_9132709000972861440_n.jpg",
-                            "follower_count": 2792
-                        },
-                        {
-                            "category": "summer",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 3124,
-                            "engage_rate": 0.7773077880069669,
-                            "post_url": "https://www.instagram.com/p/BWJROwuFywL/",
-                            "post_id": "BWJROwuFywL",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/19623350_245836862575805_2445909593612615680_n.jpg",
-                            "follower_count": 4019
-                        },
-                        {
-                            "category": "summer",
-                            "tier": "micro",
-                            "level": 2,
                             "engagement": 2573,
                             "engage_rate": 0.6402090072157253,
                             "post_url": "https://www.instagram.com/p/Ba-AqO2lSNt/",
                             "post_id": "Ba-AqO2lSNt",
                             "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/23098437_756196471235340_7597509379520200704_n.jpg",
-                            "follower_count": 4019
-                        },
-                        {
-                            "category": "summer",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 2139,
-                            "engage_rate": 0.5322219457576511,
-                            "post_url": "https://www.instagram.com/p/BXogUdAFBDb/",
-                            "post_id": "BXogUdAFBDb",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/20688107_200184287184787_899620890587693056_n.jpg",
                             "follower_count": 4019
                         },
                         {
@@ -281,17 +193,6 @@
                             "category": "summer",
                             "tier": "micro",
                             "level": 2,
-                            "engagement": 1278,
-                            "engage_rate": 0.3179895496392137,
-                            "post_url": "https://www.instagram.com/p/BbIoUvElV8l/",
-                            "post_id": "BbIoUvElV8l",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/23164402_507319082959405_6786130477519470592_n.jpg",
-                            "follower_count": 4019
-                        },
-                        {
-                            "category": "summer",
-                            "tier": "micro",
-                            "level": 2,
                             "engagement": 126,
                             "engage_rate": 0.05737704918032787,
                             "post_url": "https://www.instagram.com/p/BRnswkpBg9J/",
@@ -314,20 +215,9 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.1416562372541821,
-                    "name": "fall",
+                    "engage_rate": 0.15562792785371948,
+                    "name": "🍁",
                     "children": [
-                        {
-                            "category": "fall",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 206,
-                            "engage_rate": 0.015911021858345562,
-                            "post_url": "https://www.instagram.com/p/BP0Pvi0j1A1/",
-                            "post_id": "BP0Pvi0j1A1",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/16229296_374264779614880_414783198141087744_n.jpg",
-                            "follower_count": 12947
-                        },
                         {
                             "category": "fall",
                             "tier": "micro",
@@ -431,8 +321,8 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.10426377088034436,
-                    "name": "winter",
+                    "engage_rate": 0.07827322044305528,
+                    "name": "❄️",
                     "children": [
                         {
                             "category": "winter",
@@ -444,28 +334,6 @@
                             "post_id": "BRaQvOKAi99",
                             "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/17076811_227441194395564_5854777144483250176_n.jpg",
                             "follower_count": 3502
-                        },
-                        {
-                            "category": "winter",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 520,
-                            "engage_rate": 0.21549937836717778,
-                            "post_url": "https://www.instagram.com/p/BRB9MGSAudk/",
-                            "post_id": "BRB9MGSAudk",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/21296574_1923352211267170_5613741977808928768_n.jpg",
-                            "follower_count": 2413
-                        },
-                        {
-                            "category": "winter",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 890,
-                            "engage_rate": 0.2326797385620915,
-                            "post_url": "https://www.instagram.com/p/BYyZv3AjFbm/",
-                            "post_id": "BYyZv3AjFbm",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/21373765_1537170126303145_2803868901253840896_n.jpg",
-                            "follower_count": 3825
                         },
                         {
                             "category": "winter",
@@ -521,17 +389,6 @@
                             "post_id": "BPXsM-1gsC7",
                             "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/16110419_1363355193706748_1457961399207591936_n.jpg",
                             "follower_count": 6809
-                        },
-                        {
-                            "category": "winter",
-                            "tier": "micro",
-                            "level": 2,
-                            "engagement": 368,
-                            "engage_rate": 0.17649880095923262,
-                            "post_url": "https://www.instagram.com/p/BbnBMKHHuR5/",
-                            "post_id": "BbnBMKHHuR5",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/23594846_324130298053222_4652705047753261056_n.jpg",
-                            "follower_count": 2085
                         },
                         {
                             "category": "winter",
@@ -605,7 +462,7 @@
         },
         {
             "level": 0,
-            "engage_rate": 0.03122547849062789,
+            "engage_rate": 0.03182848535981119,
             "post_id": "power_mid",
             "name": "power middle",
             "acct_type": "power_mid",
@@ -613,7 +470,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.03113013205416385,
-                    "name": "spring",
+                    "name": "🌷",
                     "children": [
                         {
                             "category": "spring",
@@ -719,7 +576,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.037922118342620215,
-                    "name": "summer",
+                    "name": "☀️",
                     "children": [
                         {
                             "category": "summer",
@@ -836,7 +693,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.043775123778874735,
-                    "name": "fall",
+                    "name": "🍁",
                     "children": [
                         {
                             "category": "fall",
@@ -920,7 +777,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.01207453978685276,
-                    "name": "winter",
+                    "name": "❄️",
                     "children": [
                         {
                             "category": "winter",
@@ -1005,7 +862,7 @@
         },
         {
             "level": 0,
-            "engage_rate": 0.017981194312837158,
+            "engage_rate": 0.018017090382444655,
             "post_id": "celebrity",
             "name": "celebrity",
             "acct_type": "celebrity",
@@ -1013,7 +870,7 @@
                 {
                     "level": 1,
                     "engage_rate": 0.02501048887764966,
-                    "name": "spring",
+                    "name": "🌷",
                     "children": [
                         {
                             "category": "spring",
@@ -1063,8 +920,8 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.015534201675510234,
-                    "name": "summer",
+                    "engage_rate": 0.015599137634895871,
+                    "name": "☀️",
                     "children": [
                         {
                             "category": "summer",
@@ -1076,17 +933,6 @@
                             "post_id": "BZb5dqtlUjb",
                             "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/21911301_152797438644270_7180403858202427392_n.jpg",
                             "follower_count": 986619
-                        },
-                        {
-                            "category": "summer",
-                            "tier": "celebrity",
-                            "level": 2,
-                            "engagement": 15515,
-                            "engage_rate": 0.015274457837967685,
-                            "post_url": "https://www.instagram.com/p/BZEytGZBhDq/",
-                            "post_id": "BZEytGZBhDq",
-                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/21576819_1650058705026725_1697421816122834944_n.jpg",
-                            "follower_count": 1015748
                         },
                         {
                             "category": "summer",
@@ -1125,8 +971,8 @@
                 },
                 {
                     "level": 1,
-                    "engage_rate": 0.01642022213639849,
-                    "name": "fall",
+                    "engage_rate": 0.01619106927671233,
+                    "name": "🍁",
                     "children": [
                         {
                             "category": "fall",
@@ -1171,13 +1017,24 @@
                             "post_id": "BbAGpyXlXlA",
                             "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/23099051_337146776759336_6368479439520530432_n.jpg",
                             "follower_count": 1842437
+                        },
+                        {
+                            "category": "fall",
+                            "tier": "celebrity",
+                            "level": 2,
+                            "engagement": 15515,
+                            "engage_rate": 0.015274457837967685,
+                            "post_url": "https://www.instagram.com/p/BZEytGZBhDq/",
+                            "post_id": "BZEytGZBhDq",
+                            "image_url": "https://scontent-atl3-1.cdninstagram.com/t51.2885-15/e35/21576819_1650058705026725_1697421816122834944_n.jpg",
+                            "follower_count": 1015748
                         }
                     ]
                 },
                 {
                     "level": 1,
                     "engage_rate": 0.01495986456179024,
-                    "name": "winter",
+                    "name": "❄️",
                     "children": [
                         {
                             "category": "winter",

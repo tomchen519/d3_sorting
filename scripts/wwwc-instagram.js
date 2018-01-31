@@ -10,14 +10,14 @@ var root
 var force
 var width
 var height
+var maxRate
+var minRate
 var instructionsHidden = false
 
 // OTHER CONSTANT VALUES / SETTINGS
 const DATA_FILE = '/assets/data/wwwc-data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const BASE_IMAGE_URL = 'https://scontent-lax3-2.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/'
-const RATE_MULTIPIER = 15
-const DEFAULT_RADIUS = 30
 const DEFAULT_FILL = '#fff'
 const DEFAULT_LINK_DISTANCE = 200
 const DEFAULT_CHARGE = -750
@@ -25,8 +25,13 @@ const CHARGE_DISTANCE = 500
 const OVERLAY_OPACITY = 0.5
 const TEXT_OVERLAY_OPACITY = 0.9
 const FOREIGN_OBJ_SIZE = 100
-const MAX_RADIUS = 75
+const DEFAULT_RADIUS = 30
+const IMAGE_HOVER_RADIUS = 120
+const HOVER_RADIUS = 80
+const MAX_RADIUS = 90
+const MIN_RADIUS = 10
 const TOGGLE_LEVEL = -1
+const DOUBLE_CLICK_TIMEOUT = 300
 
 // DISABLE SCROLLING WHILE
 // VIEWING COLORBOX OVERLAY
@@ -228,32 +233,6 @@ function update () {
     .attr('class', 'circle-overlay')
     .attr('r', function (d) { return getCircleRadius(d) })
 
-  // SET EVENTS ON NODE CIRCLES
-
-  // TOGGLE CHILDREN AND DISPLAY
-  // EMBEDED POST ON CLICK
-  node.on('click', function (d) {
-    // PREVENT COLLAPSE ON DRAG
-    if (d3.event.defaultPrevented) { return }
-
-    var element = d3.select(this)
-    toggleChildren(d, element)
-    displayModal(d, element)
-  })
-
-  .on('mouseenter', function (d) {
-    // RE-APPEND ELEMENT SO IT DISPLAYS ON TOP
-    this.parentNode.appendChild(this)
-    var element = d3.select(this)
-    enlargeElement(element)
-  })
-
-  .on('mouseleave', function (d) {
-    // SHRINK ELEMENT TO ORIGINAL SIZE
-    var element = d3.select(this)
-    shrinkElement(element)
-  })
-
   // ADD ENGAGEMENT RATE TEXT
   var rateText = nodeEnter
     .append('svg:text')
@@ -281,6 +260,65 @@ function update () {
         return d.name.replace(/-/g, '\n')
       };
     })
+
+  // SET EVENTS ON NODES
+  var doubleClicked = false
+
+  // SHOW / HIDE ENGAGEMENT RATE ON SIGNLE CLICK
+  var singleClickHandler = function (d, element) {
+    if (d.enlarged) {
+      shrinkElement(element)
+      d.enlarged = false
+    } else {
+      enlargeElement(element)
+      d.enlarged = true
+    };
+  }
+
+  // TOGGLE CHILDREN / SHOW POST ON DOUBLE CLICK
+  var doubleClickHandler = function (d, element) {
+    toggleChildren(d, element)
+    displayModal(d)
+  }
+
+  // PREVENT SCROLLING WHEN
+  // DRAGGING NODES ON TOUCH DEVICES
+  node.on('touchmove', function () {
+    $('.parallax').css('overflow-y', 'hidden')
+  })
+
+  // RE-ENABLE SCROLLING ON TOUCH END
+  .on('touchend', function () {
+    $('.parallax').css('overflow-y', 'auto')
+  })
+
+  // TOGGLE CHILDREN AND DISPLAY
+  // EMBEDED POST ON CLICK
+  .on('click', function (d) {
+    // RE-APPEND NODE TO DISPLAY ON TOP
+    var element = d3.select(this)
+    this.parentNode.appendChild(this)
+
+    // PREVENT CLICK HANLDERS FROM
+    // BEING CALLED ON MOUSE / TOUCHMOVE
+    if (d3.event.defaultPrevented) {
+      return
+    } else {
+      if (!doubleClicked) {
+        // START TIMEOUT FOR SINGLE CLICK
+        doubleClicked = window.setTimeout(function () {
+          singleClickHandler(d, element)
+          doubleClicked = false
+        }, DOUBLE_CLICK_TIMEOUT)
+      } else {
+        // CLEAR SINGLE CLICK TIMEOUT
+        // AND CALL DOUBLE CLICK HANDLER
+        window.clearTimeout(doubleClicked)
+        doubleClickHandler(d, this)
+        doubleClicked = false
+      };
+    };
+  })
 
   // EXIT ANY OLD NODES
   node.exit().remove()
@@ -359,11 +397,11 @@ function boundedUpdate (d, axis, coordType) {
 function enlargeElement (element) {
   // ENLARGE IMAGE
   element.selectAll('.image-circle').transition().ease('linear')
-    .attr('r', MAX_RADIUS)
+    .attr('r', function (d) { return getHoverRadius(d) })
 
   // ENLARGE OVERLAY
   element.selectAll('.circle-overlay').transition().ease('linear')
-    .attr('r', MAX_RADIUS)
+    .attr('r', function (d) { return getHoverRadius(d) })
     .style('fill-opacity', OVERLAY_OPACITY)
 
   // ENLARGE OVERLAY TEXT AND TRANSITION CATEGORY TEXT
@@ -471,11 +509,24 @@ function getCircleFill (d) {
  */
 function getCircleRadius (d) {
   if (d.engage_rate) {
-    return Math.log(d.engage_rate * 100 + 1) * RATE_MULTIPIER
+    return ((MAX_RADIUS - MIN_RADIUS) * (d.engage_rate - minRate) /
+            (maxRate - minRate)) + MIN_RADIUS
   } else {
     return DEFAULT_RADIUS
   }
-}
+};
+
+/*
+ * SET DIFFERENT HOVER RADIUS FOR
+ * IMAGE NODES AND CATEGORY NODES
+ */
+function getHoverRadius (d) {
+  if (d.level === 2) {
+    return IMAGE_HOVER_RADIUS
+  } else {
+    return HOVER_RADIUS
+  }
+};
 
 /*
  * TOGGLE CHILDREN ON CLICK
@@ -490,8 +541,15 @@ function toggleChildren (d, element) {
     d.children = d._children
     d._children = null
   }
+
   // UPDATE VIS
   update()
+
+  // RE-APPEND ELEMENT IF
+  // IT EXISTS IN THE DOM
+  if (element) {
+    element.parentNode.appendChild(element)
+  };
 };
 
 /*
@@ -518,9 +576,20 @@ function flatten (root) {
     if (node.children) {
       node.children.forEach(recurse)
     };
+
+    // ADD NODE ID
     if (!node.id) {
       node.id = ++i
     };
+
+    // SET MAX AND MIN ENGAGEMENT RATES
+    if (!maxRate || node.engage_rate > maxRate) {
+      maxRate = node.engage_rate
+    } else if (!minRate || node.engage_rate < minRate) {
+      minRate = node.engage_rate
+    };
+
+    // ADD NODE TO FLAT ARRAY
     nodes.push(node)
   };
 
@@ -531,7 +600,7 @@ function flatten (root) {
 /*
  * DISPLAY IG POST FOR NODE CLICKED
  */
-function displayModal (d, element) {
+function displayModal (d) {
   if (d.post_url) {
     var instaEmbed = EMBED_URL
     var embedReqUrl = instaEmbed + d.post_id
