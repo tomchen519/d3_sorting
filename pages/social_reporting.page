@@ -33,11 +33,11 @@
       </div>
       <!-- CONTROLS -->
       <div id="controls">
-        <div class="select_date" id='date_range'>
+        <!-- <div class="select_date" id='date_range'>
           <span class="select_title">date range:</span>
           <input name="daterange" />
           <div></div>
-        </div>
+        </div> -->
         <div class="select_component">
           <span class="select_title">competitive set:</span>
           <select class="competitive_set" id="select_comp">
