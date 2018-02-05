@@ -9,6 +9,7 @@ var stepsX = 5
 var stepsY = 40
 var clickCount = 0
 var image_dim = 150
+var stroke_width = 2
 var node_top = []
 var node_bottom = []
 var marginLeft = image_dim
@@ -225,7 +226,7 @@ $(document).ready(function() {
       .attr('x', function(d) { return -1 * image_dim/2})
       .attr('y', function(d) { return -1 * image_dim/2})
       .style('fill', function (d) { return 'url(#' + d.post_id + '-bg-image)' })
-      .style('stroke-width', '2')
+      .style('stroke-width', stroke_width)
       .style('stroke', function (d) { return setStroke(d) })
 
     defs.append('image')
@@ -270,10 +271,16 @@ $(document).ready(function() {
   function highlight(selected) {
     if (!selected.classed('highlighted')) {
       selected.classed('highlighted', true)
-      selected.select('rect').style('stroke', '#0035BC')
+      selected.select('rect').style({
+        'stroke': '#6600cc',
+        'stroke-width': 4,
+      })
     } else {
       selected.classed('highlighted', false)
-      selected.select('rect').style('stroke', setStroke(selected["0"]["0"].__data__))
+      selected.select('rect').style({
+        'stroke': setStroke(selected["0"]["0"].__data__),
+        'stroke-width': stroke_width
+      })
     }
   }
 
