@@ -273,7 +273,7 @@ $(document).ready(function() {
       selected.classed('highlighted', true)
       selected.select('rect').style({
         'stroke': '#6600cc',
-        'stroke-width': 4,
+        'stroke-width': 3,
       })
     } else {
       selected.classed('highlighted', false)
@@ -287,7 +287,7 @@ $(document).ready(function() {
   // SET STROKE COLOR FOR ACCT TYPE
   function setStroke (d) {
     if (d.acct_type === 'owned') {
-      return 'rgba(75, 136, 234, 0.8)'
+      return 'rgba(0, 89, 179, 1)'
     } else {
       return 'rgba(165, 0, 22, 0.8)'
     }
