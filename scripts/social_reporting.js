@@ -18,7 +18,7 @@ var topNode = null
 var color = d3.scale.category20()
 var money = d3.format('$,04d')
 
-const DATA_FILE = 'data/live_data.json'
+const DATA_FILE = '../assets/data/live_data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const FOREIGN_OBJ_SIZE = 100
 
@@ -555,10 +555,10 @@ $(document).ready(function() {
 
   })
 
-  $('input[name="daterange"]').daterangepicker();
-  $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
-    console.log(picker.startDate.format('YYYY-MM-DD'));
-    console.log(picker.endDate.format('YYYY-MM-DD'));
-  });
+  // $('input[name="daterange"]').daterangepicker();
+  // $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+  //   console.log(picker.startDate.format('YYYY-MM-DD'));
+  //   console.log(picker.endDate.format('YYYY-MM-DD'));
+  // });
 
 })

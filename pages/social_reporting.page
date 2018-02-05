@@ -26,7 +26,7 @@
   <header>
     <div id="header">
       <div id="header-section">
-        <a href="#" id="clique-intelligence">
+        <a href="#" class="clique-intelligence">
           <img class="header-image" src="assets/images/clique_logo_white.png"></img>
           <h4>Intelligence</h4>
         </a>
@@ -85,14 +85,20 @@
   </div>
 
   <!-- FOOTER ROW -->
-  <!-- <div class="row" id="footer-row">
+  <div class="row" id="footer-row">
     <footer>
-      <div class="col-xs-12" id="footer-section">
+      <!-- <div class="col-xs-12" id="footer-section">
         <a href="#" id="clique-intelligence">
           <img class="footer-image" src="img/clique_logo_white.png"></img>
           <h4>Intelligence</h4>
         </a>
+      </div> -->
+      <div id="footer-section">
+        <a href="#" class="clique-intelligence">
+          <img class="header-image" src="assets/images/clique_logo_white.png"></img>
+          <h4>Intelligence</h4>
+        </a>
       </div>
     </footer>
-  </div> -->
+  </div>
 </body>
