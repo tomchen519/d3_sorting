@@ -159,6 +159,7 @@ select {
 .node {
   fill: black;
   stroke-width: 3;
+  stroke-linejoin: round;
 }
 
 .brand_name {

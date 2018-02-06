@@ -23,8 +23,8 @@ const DATA_FILE = '../assets/data/live_data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const FOREIGN_OBJ_SIZE = 100
 
-// const DATA_LIVE_DEV = "https://c09cttmrll.execute-api.us-east-1.amazonaws.com/test/post-data"
-const DATA_LIVE = "https://52grk8b88f.execute-api.us-east-1.amazonaws.com/prod/get-ig-post-data"
+const DATA_LIVE = "https://c09cttmrll.execute-api.us-east-1.amazonaws.com/test/post-data"
+// const DATA_LIVE = "https://52grk8b88f.execute-api.us-east-1.amazonaws.com/prod/get-ig-post-data"
 const DATA_TIME_RANGE_PATH = "/date-range?"
 
 $(document).ready(function() {
@@ -274,7 +274,7 @@ $(document).ready(function() {
       selected.classed('highlighted', true)
       selected.select('rect').style({
         'stroke': '#6600cc',
-        'stroke-width': 3,
+        'stroke-width': 5,
       })
     } else {
       selected.classed('highlighted', false)
