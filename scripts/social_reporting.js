@@ -101,29 +101,43 @@ $(document).ready(function() {
 
   console.log('loading data...')
 
-  d3.json(DATA_LIVE, function(error, data) {
-    if (error) { $('body').html("ERROR LOADING DATA, please try again later") }
-    post_data = data
-    competitive_options = []
-    data.forEach(function(item) {
-      set = item.competitive_set
-      setName = set.charAt(0).toUpperCase() + set.slice(1)
-      if (competitive_options.indexOf(setName) == -1) {
-        competitive_options.push(setName)
-      }
-    })
+  getData()
+  
+  function getData(date_range_list = null) {
+    if (date_range_list !== null) {
+      console.log(date_range_list)
+      start_date = date_range_list[0]
+      end_date = date_range_list[1]
+      url = DATA_LIVE + DATA_TIME_RANGE_PATH
+      url += "startDate=" + start_date + '&'
+      url += "endDate=" + end_date
+      console.log(url)
+    } else {
+      d3.json(DATA_LIVE, function(error, data) {
+        if (error) { $('body').html("ERROR LOADING DATA, please try again later") }
+        post_data = data
+        competitive_options = []
+        data.forEach(function(item) {
+          set = item.competitive_set
+          setName = set.charAt(0).toUpperCase() + set.slice(1)
+          if (competitive_options.indexOf(setName) == -1) {
+            competitive_options.push(setName)
+          }
+        })
+    
+        competitive_options.sort()
+        var selectComp_element = $('#select_comp')
+        competitive_options.forEach(function(setName) {
+          selectComp_element.append('<option value="' + setName + '">' +
+          setName + '</option>')
+        })
+        sortComp = selectComp_element[0].value
+        filterData(sortComp)
+      })
+    }
+  }
 
-    competitive_options.sort()
-    var selectComp_element = $('#select_comp')
-    competitive_options.forEach(function(setName) {
-      selectComp_element.append('<option value="' + setName + '">' +
-      setName + '</option>')
-    })
-    sortComp = selectComp_element[0].value
-    loadData(sortComp)
-  })
-
-  function loadData (competitiveSet) {
+  function filterData (competitiveSet) {
       perform_top_data = []
       perform_bottom_data = []
 
@@ -486,7 +500,7 @@ $(document).ready(function() {
     sortComp = newCompset
 
     d3.selectAll("svg").selectAll("*").remove()
-    loadData(sortComp)
+    filterData(sortComp)
   })
 
 
@@ -560,13 +574,15 @@ $(document).ready(function() {
     $('html').stop().animate({
       scrollTop: dist -120
     }, 2000)
-
   })
 
-  // $('input[name="daterange"]').daterangepicker();
-  // $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
-  //   console.log(picker.startDate.format('YYYY-MM-DD'));
-  //   console.log(picker.endDate.format('YYYY-MM-DD'));
-  // });
+  $('input[name="daterange"]').daterangepicker();
+  $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+    start_date = picker.startDate.format('YYYY-MM-DD')
+    end_date = picker.endDate.format('YYYY-MM-DD')
+    console.log(start_date);
+    console.log(end_date);
+    getData([start_date, end_date])
+  });
 
 })

@@ -166,7 +166,7 @@ select {
   z-index: 1000;
 }
 
-.glyphicon {
+#point_to_bottom, #point_to_top {
   z-index: -100;
 }
 
