@@ -24,8 +24,8 @@ const DATA_FILE = '../assets/data/live_data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const FOREIGN_OBJ_SIZE = 100
 
-const DATA_LIVE = "https://c09cttmrll.execute-api.us-east-1.amazonaws.com/test/post-data"
-// const DATA_LIVE = "https://52grk8b88f.execute-api.us-east-1.amazonaws.com/prod/get-ig-post-data"
+// const DATA_LIVE = "https://c09cttmrll.execute-api.us-east-1.amazonaws.com/test/post-data"
+const DATA_LIVE = "https://52grk8b88f.execute-api.us-east-1.amazonaws.com/prod/get-ig-post-data"
 const DATA_TIME_RANGE_PATH = "/date-range?"
 
 $(document).ready(function() {
@@ -108,6 +108,7 @@ $(document).ready(function() {
           return
         }
         post_data = data
+        console.log(data)
         $('#legend_stats').html("Hover over picture to see stats")
 
         competitive_options = []
@@ -586,9 +587,11 @@ $(document).ready(function() {
   $('a[href^="#"], div[href^="#"]').on('click', function (event) {
     var target = $(this.getAttribute('href'))
     var dist = target["0"].offsetTop
+    var header_legend = $('header').height() + $('#legend').height()
+    console.log(header_legend)
     event.preventDefault()
     $('html').stop().animate({
-      scrollTop: dist -120
+      scrollTop: (dist - header_legend)
     }, 2000)
   })
 
