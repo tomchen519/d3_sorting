@@ -18,6 +18,7 @@ var page_height = 6500 // Needs to be adjusted depending on number of rows
 var topNode = null
 var color = d3.scale.category20()
 var money = d3.format('$,04d')
+var accounts_median = {}
 
 const DATA_FILE = '../assets/data/live_data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
@@ -119,12 +120,26 @@ $(document).ready(function() {
         competitive_options = []
         data.forEach(function(item) {
           set = item.competitive_set
+          username = item.username
           setName = set.charAt(0).toUpperCase() + set.slice(1)
           if (competitive_options.indexOf(setName) == -1) {
             competitive_options.push(setName)
           }
+          item.engage_rate = ((item.likes + item.comments) / item.followers)
+          engage_rate = item.engage_rate
+          if (!(username in accounts_median)) {
+            accounts_median[username] = {}
+            accounts_median[username]['engage_rates'] = []
+            accounts_median[username]['median'] = 0
+            accounts_median[username]['engage_rates'].push(engage_rate)            
+          } else {
+            accounts_median[username]['engage_rates'].push(engage_rate)
+
+          }
         })
-    
+        for (var acct in accounts_median) {
+          accounts_median[acct]['median'] = median(accounts_median[acct]['engage_rates'])
+        }
         competitive_options.sort()
         var selectComp_element = $('#select_comp')
         competitive_options.forEach(function(setName) {
@@ -144,12 +159,9 @@ $(document).ready(function() {
       console.log("selected competitive set: " + competitiveSet)
 
       post_data.forEach(function(item) {
-        item.engage_rate = ((item.likes + item.comments) / item.followers)
         if (item.competitive_set === competitiveSet) {
-          if (item.perform === 'top') {
-
+          if (item.engage_rate > accounts_median[item.username]['median']) {
             perform_top_data.push(item)
-
           } else {
             perform_bottom_data.push(item)
           }
@@ -552,6 +564,17 @@ $(document).ready(function() {
     if (topNode) { topNode.classed('active', false) };
     topNode = d3.select(maxNode).classed('active', true)
   };
+
+  function median(numbers) {
+    var median = 0
+    var arrayLen = numbers.length
+    if (arrayLen % 2 === 0) {
+      median = (numbers[arrayLen / 2 - 1] + numbers[arrayLen / 2]) / 2
+    } else {
+      median = numbers[(arrayLen - 1) / 2]
+    }
+    return median
+  }
 
   $('#to_bottom').on('mouseover', function(){
     $('#top_pointer').append('Jump to Bottom')
