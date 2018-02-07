@@ -13,7 +13,7 @@ body {
 }
 
 header {
-  height: 5em;
+  height: 6em;
   margin: auto;
   background-color: rgb(30,30,30);
   position: fixed;
@@ -58,6 +58,7 @@ input {
 }
 
 .category {
+  margin-top: 10px;
   font-size: 20px;
   margin-left: 5px;
   display: block;
@@ -94,20 +95,20 @@ h4 {
   font-weight: bold;
   float: right;
   display: inline-flex;
-  bottom: 15px;
+  bottom: -25px;
   padding-right: 5px;
 }
 
 #legend {
   height: 2em;
   border: 1px solid gray;
-  top: 80px;
+  top: 96px;
   width: 100%;
   position: absolute;
   background-color: white;
 }
 
-.legend_title {
+#legend_stats {
   margin-left: 5px;
 }
 
@@ -193,12 +194,13 @@ active.tooltip {
 
 @media screen and (max-width: 1140px) {
   #header-section {
-    width: 295px;
+    /* width: 295px; */
+    margin-top: -20px;
   }
 
   #controls {
     display: inline-block;
-    margin-top: -20px;
+    margin-top: -10px;
   }
 
   .select_component, .select_date {

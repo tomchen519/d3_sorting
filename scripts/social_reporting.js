@@ -9,7 +9,7 @@ var stepsX = 5
 var stepsY = 40
 var clickCount = 0
 var image_dim = 150
-var stroke_width = 2
+var stroke_width = 1
 var node_top = []
 var node_bottom = []
 var marginLeft = image_dim
@@ -61,17 +61,6 @@ $(document).ready(function() {
 
   var dataKey = function (d) { return d.id }
 
-  var sortBy = function (by) {
-    return function (a, b) {
-      if (a[by] === b[by]) {
-        return 0
-      } else if (a[by] > b[by]) {
-        return -1
-      };
-      return 1
-    }
-  }
-
   function format (d, index) {
     d.id = id++
     d.order = order++
@@ -101,7 +90,7 @@ $(document).ready(function() {
   };
 
   console.log('loading data...')
-
+  $('#legend_stats').html("Loading Data...")
   getData()
   
   function getData(date_range_list = null) {
@@ -115,8 +104,14 @@ $(document).ready(function() {
       console.log(url)
     } else {
       d3.json(DATA_LIVE, function(error, data) {
-        if (error) { $('body').html("ERROR LOADING DATA, please try again later") }
+        if (error) {
+          $('#legend_stats').html("Error occurred while loading data, please try again later").css("color", "red")
+          return
+        }
         post_data = data
+        $('#legend_stats').html("Hover over picture to see stats")
+        console.log(data)
+
         competitive_options = []
         data.forEach(function(item) {
           set = item.competitive_set
@@ -159,7 +154,7 @@ $(document).ready(function() {
       console.log("selected competitive set: " + competitiveSet)
 
       post_data.forEach(function(item) {
-        if (item.competitive_set === competitiveSet) {
+        if (item.competitive_set === competitiveSet.toLowerCase()) {
           if (item.engage_rate > accounts_median[item.username]['median']) {
             perform_top_data.push(item)
           } else {
@@ -300,7 +295,7 @@ $(document).ready(function() {
       selected.classed('highlighted', true)
       selected.select('rect').style({
         'stroke': '#397AF2',
-        'stroke-width': 5,
+        'stroke-width': 3,
       })
     } else {
       selected.classed('highlighted', false)
@@ -372,7 +367,7 @@ $(document).ready(function() {
   }
 
   function removeText () {
-    $("#legend_stats").html("")
+    $("#legend_stats").html("Hover over picture to see stats")
   }
 
   function displayPost (d) {
@@ -441,6 +436,17 @@ $(document).ready(function() {
       })
   };
 
+  var sortBy = function (by) {
+    return function (a, b) {
+      if (a[by] === b[by]) {
+        return 0
+      } else if (a[by] > b[by]) {
+        return -1
+      };
+      return 1
+    }
+  }
+
   function sortNodesByMetric (metric, node) {
     removeImage()
     var data = node.data().sort(sortBy(metric))
@@ -452,17 +458,23 @@ $(document).ready(function() {
 
   function sortByBrand (node) {
     removeImage()
-
+    node.sort(function(a, b) {
+      console.log(a)
+      console.log(b)
+      return b.engage_rate - a.engage_rate})
     var nest = d3.nest()
-      .key(function (d) { return d.brand })
+      .key(function (d) { return d.username })
       .sortKeys(d3.ascending)
       .sortValues(d3.ascending)
       .key(function (d) { return d.engage_rate })
+      .sortValues(d3.ascending)
       .entries(node.data())
 
+    console.log(nest)
     var data = []
     nest.forEach(function (leaf) {
       leaf.values.forEach(function (leaf) { data = data.concat(leaf.values) })
+      console.log(leaf)
     })
     data.forEach(function (d, i) { d.order = i })
     return node.data(data, dataKey).call(grid)
@@ -470,25 +482,6 @@ $(document).ready(function() {
       .each('end', loadImage)
   };
 
-  function sortByCategory (node) {
-    removeImage()
-
-    var nest = d3.nest()
-      .key(function (d) { return d.category })
-      .sortKeys(d3.ascending)
-      .sortValues(d3.ascending)
-      .key(function (d) { return d.engage_rate })
-      .entries(node.data())
-
-    var data = []
-    nest.forEach(function (leaf) {
-      leaf.values.forEach(function (leaf) { data = data.concat(leaf.values) })
-    })
-    data.forEach(function (d, i) { d.order = i })
-    return node.data(data, dataKey).call(grid)
-      .transition().ease('linear').duration(2000).call(updatePos)
-      .each('end', loadImage)
-  };
 
   // listen for sort button submit
   $('.sort-by').on('change', function () {
@@ -568,6 +561,7 @@ $(document).ready(function() {
   function median(numbers) {
     var median = 0
     var arrayLen = numbers.length
+    numbers.sort(function(a, b) {return a - b})
     if (arrayLen % 2 === 0) {
       median = (numbers[arrayLen / 2 - 1] + numbers[arrayLen / 2]) / 2
     } else {
