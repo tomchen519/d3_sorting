@@ -24,8 +24,8 @@ const DATA_FILE = '../assets/data/live_data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const FOREIGN_OBJ_SIZE = 100
 
-// const DATA_LIVE = "https://c09cttmrll.execute-api.us-east-1.amazonaws.com/test/post-data"
-const DATA_LIVE = "https://52grk8b88f.execute-api.us-east-1.amazonaws.com/prod/get-ig-post-data"
+const DATA_LIVE = "https://c09cttmrll.execute-api.us-east-1.amazonaws.com/test/post-data"
+// const DATA_LIVE = "https://52grk8b88f.execute-api.us-east-1.amazonaws.com/prod/get-ig-post-data"
 const DATA_TIME_RANGE_PATH = "/date-range?"
 
 $(document).ready(function() {
@@ -54,7 +54,6 @@ $(document).ready(function() {
       height: 'auto'
     })
 
-  console.log(width)
   var x = d3.scale.linear().domain([0, stepsX]).range([marginLeft, width + marginRight/4])
   var y = d3.scale.linear().domain([0, stepsY]).range([marginTop, page_height])
   var fisheye = d3.fisheye.circular().radius(60).distortion(distortion)
@@ -110,7 +109,6 @@ $(document).ready(function() {
         }
         post_data = data
         $('#legend_stats').html("Hover over picture to see stats")
-        console.log(data)
 
         competitive_options = []
         data.forEach(function(item) {
@@ -449,32 +447,32 @@ $(document).ready(function() {
 
   function sortNodesByMetric (metric, node) {
     removeImage()
-    var data = node.data().sort(sortBy(metric))
-    data.forEach(function (d, i) { d.order = i })
-    node.data(data, dataKey)
-    return node.call(grid).transition().ease('linear').duration(2000).call(updatePos)
-    .each('end', loadImage)
+    if (metric === 'brand') {
+      sortByBrand(node)
+    } else {
+      var data = node.data().sort(sortBy(metric))
+      data.forEach(function (d, i) { d.order = i })
+      node.data(data, dataKey)
+      return node.call(grid).transition().ease('linear').duration(2000).call(updatePos)
+      .each('end', loadImage)
+    }
   };
 
   function sortByBrand (node) {
     removeImage()
     node.sort(function(a, b) {
-      console.log(a)
-      console.log(b)
       return b.engage_rate - a.engage_rate})
     var nest = d3.nest()
       .key(function (d) { return d.username })
       .sortKeys(d3.ascending)
       .sortValues(d3.ascending)
       .key(function (d) { return d.engage_rate })
-      .sortValues(d3.ascending)
+      .sortValues(d3.descending)
       .entries(node.data())
 
-    console.log(nest)
     var data = []
     nest.forEach(function (leaf) {
       leaf.values.forEach(function (leaf) { data = data.concat(leaf.values) })
-      console.log(leaf)
     })
     data.forEach(function (d, i) { d.order = i })
     return node.data(data, dataKey).call(grid)
@@ -487,7 +485,7 @@ $(document).ready(function() {
   $('.sort-by').on('change', function () {
     var newMetric = $(this).val()
     if (sortMetric === newMetric) { return }
-
+  
     sortMetric = newMetric
     if (sortMetric === 'brand') {
       sortByBrand(node_top)
@@ -507,6 +505,7 @@ $(document).ready(function() {
     d3.selectAll("svg").selectAll("*").remove()
     filterData(sortComp)
   })
+
 
 
   d3.selection.prototype.moveToFront = function() {
