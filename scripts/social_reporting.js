@@ -299,7 +299,7 @@ $(document).ready(function() {
     if (!selected.classed('highlighted')) {
       selected.classed('highlighted', true)
       selected.select('rect').style({
-        'stroke': '#6600cc',
+        'stroke': '#397AF2',
         'stroke-width': 5,
       })
     } else {
@@ -314,9 +314,9 @@ $(document).ready(function() {
   // SET STROKE COLOR FOR ACCT TYPE
   function setStroke (d) {
     if (d.acct_type === 'owned') {
-      return 'rgba(0, 89, 179, 1)'
+      return '#DCDCDC'
     } else {
-      return 'rgba(165, 0, 22, 0.8)'
+      return '#4F4F4F'
     }
   }
 
