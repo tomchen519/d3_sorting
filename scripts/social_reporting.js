@@ -108,7 +108,6 @@ $(document).ready(function() {
           return
         }
         post_data = data
-        console.log(data)
         $('#legend_stats').html("Hover over picture to see stats")
 
         competitive_options = []
@@ -204,6 +203,12 @@ $(document).ready(function() {
   }
 
   function gotposts (posts, visual, node_array) {
+    var sort_order
+    if (node_array == "node_bottom") {
+      sort_order = 'asc'
+    } else {
+      sort_order = 'des'
+    }
     window[node_array] = visual.selectAll('.node')
       .data(posts, dataKey)
       .enter().append('g')
@@ -239,7 +244,7 @@ $(document).ready(function() {
 
     window[node_array].call(randomize)
       .call(updatePos)
-      .call(sortNodesByMetric.bind(null, sortMetric))
+      .call(sortNodesByMetric.bind(null, sortMetric, sort_order))
 
     window[node_array].append('rect')
       .attr('width', image_dim)
@@ -435,23 +440,37 @@ $(document).ready(function() {
       })
   };
 
-  var sortBy = function (by) {
-    return function (a, b) {
-      if (a[by] === b[by]) {
-        return 0
-      } else if (a[by] > b[by]) {
-        return -1
-      };
-      return 1
+  var sortBy = function (by, sort_order) {
+    if (sort_order == 'des') {
+      return function (a, b) {
+        if (a[by] === b[by]) {
+          return 0
+        } else if (a[by] > b[by]) {
+          return -1
+        };
+        return 1
+      }
+    } else {
+      return function (a, b) {
+        if (b[by] === a[by]) {
+          return 0
+        } else if (b[by] > a[by]) {
+          return -1
+        };
+        return 1
+      }
     }
   }
 
-  function sortNodesByMetric (metric, node) {
+  function sortNodesByMetric (metric, sort_order, node) {
     removeImage()
+    console.log("metric: " + metric)
+    console.log("sort order: " + sort_order)
+    console.log(node)
     if (metric === 'brand') {
-      sortByBrand(node)
+      sortByBrand(node, sort_order)
     } else {
-      var data = node.data().sort(sortBy(metric))
+      var data = node.data().sort(sortBy(metric, sort_order))
       data.forEach(function (d, i) { d.order = i })
       node.data(data, dataKey)
       return node.call(grid).transition().ease('linear').duration(2000).call(updatePos)
@@ -459,10 +478,15 @@ $(document).ready(function() {
     }
   };
 
-  function sortByBrand (node) {
+  function sortByBrand (node, sort_order) {
     removeImage()
     node.sort(function(a, b) {
-      return b.engage_rate - a.engage_rate})
+      if (sort_order == 'des') {
+        return b.engage_rate - a.engage_rate
+      } else {
+        return a.engage_rate - b.engage_rate
+      }
+    })
     var nest = d3.nest()
       .key(function (d) { return d.username })
       .sortKeys(d3.ascending)
@@ -489,11 +513,11 @@ $(document).ready(function() {
   
     sortMetric = newMetric
     if (sortMetric === 'brand') {
-      sortByBrand(node_top)
-      sortByBrand(node_bottom)
+      sortByBrand(node_top, 'des')
+      sortByBrand(node_bottom, 'asc')
     } else {
-      node_top.call(sortNodesByMetric.bind(null, sortMetric))
-      node_bottom.call(sortNodesByMetric.bind(null, sortMetric))
+      node_top.call(sortNodesByMetric.bind(null, sortMetric, "des"))
+      node_bottom.call(sortNodesByMetric.bind(null, sortMetric, "asc"))
     };
   })
 
