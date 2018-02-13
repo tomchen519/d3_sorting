@@ -36,10 +36,6 @@ header {
   color: rgba(0,0,0,0.7)
 }
 
-#date_range {
-  z-index: 1000;
-}
-
 #empty {
   height: 120px;
 }
@@ -50,11 +46,17 @@ header {
   z-index: 100;
 }
 
-input {
+#date_input {
   font-family: "Roboto";
   font-size: 16px;
   margin-right: 5px;
   border-radius: 5px;
+  width: 195px;
+  height: 1.75em;
+}
+
+#calendar {
+  z-index: 1000;
 }
 
 .category {
@@ -70,6 +72,13 @@ h4 {
   display: inline-block;
   vertical-align: middle;
   margin-left: 5px;
+  text-transform: uppercase;
+}
+
+#tool_title {
+  margin-left: 15px;
+  font-size: 16px;
+  letter-spacing: 2px;
 }
 
 .header-image {
@@ -80,12 +89,6 @@ h4 {
 
 #header-section{
   z-index: 100;
-  transform: translateY(50%);
-  -ms-transform: translateY(50%);
-  -moz-transform: translateY(50%);
-  -webkit-transform: translateY(50%);
-  -o-transform: translateY(50%);
-  text-transform: uppercase;
   color: white;
 }
 
@@ -95,7 +98,6 @@ h4 {
   font-weight: bold;
   float: right;
   display: inline-flex;
-  bottom: -25px;
   padding-right: 5px;
 }
 
@@ -118,20 +120,6 @@ h4 {
   margin-right: 5px;
 }
 
-@media screen and (max-width: 700px) {
-  #clique-intelligence, #controls {
-    position: relative;
-  }
-  #clique-intelligence {
-    top: -1em;
-    left: -10px;
-  }
-  #controls {
-    left: 5px;
-    bottom: 0px;
-  }
-}
-
 button, select {
   outline: none;
 }
@@ -142,14 +130,6 @@ select {
 
 .select_title {
   color: white;
-}
-
-#date_range input {
-  width: 200px;
-}
-
-#date_range div {
-  font-size: 10pt;
 }
 
 .select_component {
@@ -181,7 +161,7 @@ select {
 
 .tooltip text {
   fill: white;
-}*/
+}
 
 active.tooltip {
   display: inherit;
@@ -193,67 +173,20 @@ active.tooltip {
 }
 
 @media screen and (max-width: 1140px) {
-  #header-section {
-    /* width: 295px; */
-    margin-top: -20px;
-  }
-
   #controls {
     display: inline-block;
-    margin-top: -10px;
+    transform: translateY(-20%);
+    -ms-transform: translateY(-20%);
+    -moz-transform: translateY(-20%);
+    -webkit-transform: translateY(-20%);
   }
 
   .select_component, .select_date {
-    margin-top: 2px;
-    margin-bottom: 0;
     margin-left: 0;
-    display: block;
-    /* display: inline; */
+    display: inline;
+  }
+
+  #tool_title {
+    margin-top: -15px;
   }
 }
-
-/*.sort-by{
-  border: 1px solid #999;
-  background-color: green;
-  -webkit-appearance: none;
-  padding: 5px;
-  border-radius: 0px;
-}*/
-
-/*@media (max-width: 900px) {
-  h1, #controls {
-    float: left;
-    margin-left: 20px;
-  }
-
-  .share-left {
-    left: inherit;
-    right: 20px;
-    top: 60px;
-  }
-}
-
-@media(max-width: 400px) {
-  .share-left, .share-right, .fb-share-right {
-    display: none;
-  }
-
-  h1 {
-    display: none;
-  }
-
-  #controls {
-    font-size: 10px;
-    position: absolute;
-    top: inherit;
-    bottom: 5px;
-  }
-
-  #controls select {
-    width: 100px;
-  }
-
-  #source {
-    display: none;
-  }
-}*/

@@ -19,12 +19,17 @@ var topNode = null
 var color = d3.scale.category20()
 var money = d3.format('$,04d')
 var accounts_median = {}
+var data_date_range = []
+var error_image = '../assets/images/not_available.jpg'
 
 const DATA_FILE = '../assets/data/live_data.json'
 const EMBED_URL = 'https://api.instagram.com/oembed/?url=http://instagr.am/p/'
 const FOREIGN_OBJ_SIZE = 100
 
+// Test API
 // const DATA_LIVE = "https://c09cttmrll.execute-api.us-east-1.amazonaws.com/test/post-data"
+
+// Prod API
 const DATA_LIVE = "https://52grk8b88f.execute-api.us-east-1.amazonaws.com/prod/get-ig-post-data"
 const DATA_TIME_RANGE_PATH = "/date-range?"
 
@@ -36,6 +41,8 @@ $(document).ready(function() {
   var sortMetric = $('.sort-by').val()
   var sortComp = $('#select_comp').val()
   var marginTop = $('header').height() + $('.category').height() + (image_dim/4)
+  var today = new Date()
+  var output_options = {year:"numeric", month:"2-digit", day:"2-digit"}
 
   var drag = d3.behavior.drag()
   var vis = d3.select('#d3-layout-container1')
@@ -87,93 +94,115 @@ $(document).ready(function() {
     // we're in an iframe! oh on! hide the twitter follow button
     $('.share-left').hide()
   };
+ 
+  var default_date_range = getDefaultDateRange(today)
 
-  console.log('loading data...')
-  $('#legend_stats').html("Loading Data...")
   getData()
-  
+
   function getData(date_range_list = null) {
+    $('#legend_stats').html(
+      '<div>Loading Data...<span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>')
     if (date_range_list !== null) {
-      console.log(date_range_list)
       start_date = date_range_list[0]
       end_date = date_range_list[1]
-      url = DATA_LIVE + DATA_TIME_RANGE_PATH
-      url += "startDate=" + start_date + '&'
-      url += "endDate=" + end_date
-      console.log(url)
+      date_format = "YYYY-MM-DD"
+      if (start_date !== default_date_range[0] ||
+          end_date !== default_date_range[1]) {
+      } else {
+        return
+      }
+      var url = DATA_LIVE + DATA_TIME_RANGE_PATH
+      url += "startDate=" + formatDateForRequest(start_date) + '&'
+      url += "endDate=" + formatDateForRequest(end_date)
     } else {
-      d3.json(DATA_LIVE, function(error, data) {
-        if (error) {
-          $('#legend_stats').html("Error occurred while loading data, please try again later").css("color", "red")
-          return
-        }
-        post_data = data
-        $('#legend_stats').html("Hover over picture to see stats")
-
-        competitive_options = []
-        data.forEach(function(item) {
-          set = item.competitive_set
-          username = item.username
-          setName = set.charAt(0).toUpperCase() + set.slice(1)
-          if (competitive_options.indexOf(setName) == -1) {
-            competitive_options.push(setName)
-          }
-          item.engage_rate = ((item.likes + item.comments) / item.followers)
-          engage_rate = item.engage_rate
-          if (!(username in accounts_median)) {
-            accounts_median[username] = {}
-            accounts_median[username]['engage_rates'] = []
-            accounts_median[username]['median'] = 0
-            accounts_median[username]['engage_rates'].push(engage_rate)            
-          } else {
-            accounts_median[username]['engage_rates'].push(engage_rate)
-
-          }
-        })
-        for (var acct in accounts_median) {
-          accounts_median[acct]['median'] = median(accounts_median[acct]['engage_rates'])
-        }
-        competitive_options.sort()
-        var selectComp_element = $('#select_comp')
-        competitive_options.forEach(function(setName) {
-          selectComp_element.append('<option value="' + setName + '">' +
-          setName + '</option>')
-        })
-        sortComp = selectComp_element[0].value
-        filterData(sortComp)
-      })
+      url = DATA_LIVE
     }
+    fetchData(url)
+  }
+
+  function fetchData (url) {
+    d3.json(url, function(error, data) {
+      d3.selectAll("svg").selectAll("*").remove()
+      if (error) {
+        $('#legend_stats').html("Error occurred while loading data, please try again later").css("color", "red")
+        return
+      }
+      post_data = data
+      $('#legend_stats').html("Hover over picture to see stats").css("color", "black")
+
+      competitive_options = []
+      data.forEach(function(item) {
+        var set = item.competitive_set
+        var username = item.username
+        var publish_date = item.publish_date
+        data_date_range.push(publish_date)
+        var setName = set.charAt(0).toUpperCase() + set.slice(1)
+        if (competitive_options.indexOf(setName) == -1) {
+          competitive_options.push(setName)
+        }
+        item.engage_rate = ((item.likes + item.comments) / item.followers)
+        var engage_rate = item.engage_rate
+        if (!(username in accounts_median)) {
+          accounts_median[username] = {}
+          accounts_median[username]['engage_rates'] = []
+          accounts_median[username]['median'] = 0
+          accounts_median[username]['engage_rates'].push(engage_rate)            
+        } else {
+          accounts_median[username]['engage_rates'].push(engage_rate)
+        }
+      })
+      for (var acct in accounts_median) {
+        accounts_median[acct]['median'] = median(accounts_median[acct]['engage_rates'])
+      }
+      datesToCalendar(data_date_range)
+      competitive_options.sort()
+      var selectComp_element = $('#select_comp')
+      selectComp_element.html('')
+      competitive_options.forEach(function(setName) {
+        selectComp_element.append('<option value="' + setName + '">' +
+        setName + '</option>')
+      })
+      sortComp = selectComp_element[0].value
+      filterData(sortComp)
+    })
+  }
+
+  function datesToCalendar (date_list) {
+    date_list.sort()
+    var first_date = date_list[0]
+    var last_date = date_list[date_list.length - 1]
+    data_date_range = []
+    $('#date_input').data('daterangepicker').setStartDate(formatDateForCalendar(first_date))
+    $('#date_input').data('daterangepicker').setEndDate(formatDateForCalendar(last_date))
   }
 
   function filterData (competitiveSet) {
-      perform_top_data = []
-      perform_bottom_data = []
+    perform_top_data = []
+    perform_bottom_data = []
 
-      console.log("selected competitive set: " + competitiveSet)
-
-      post_data.forEach(function(item) {
-        if (item.competitive_set === competitiveSet.toLowerCase()) {
-          if (item.engage_rate > accounts_median[item.username]['median']) {
-            perform_top_data.push(item)
-          } else {
-            perform_bottom_data.push(item)
-          }
+    post_data.forEach(function(item) {
+      if (item.competitive_set === competitiveSet.toLowerCase()) {
+        if (item.engage_rate > accounts_median[item.username]['median']) {
+          perform_top_data.push(item)
+        } else {
+          perform_bottom_data.push(item)
         }
-      })
+      }
+    })
 
-      vis.style({
-        height: getHeight(perform_top_data) + 'px'
-      })
-      vis2.style({
-        height: getHeight(perform_bottom_data) + 'px'
-      })
-      post_data.forEach(format)
+    vis.style({
+      height: getHeight(perform_top_data) + 'px'
+    })
+    vis2.style({
+      height: getHeight(perform_bottom_data) + 'px'
+    })
+    post_data.forEach(format)
 
-      gotposts(perform_top_data, vis, "node_top")
-      fisheyeEffect(vis)
-      gotposts(perform_bottom_data, vis2, "node_bottom")
-      fisheyeEffect(vis2)
-      node = node_top.concat(node_bottom)
+    gotposts(perform_top_data, vis, "node_top")
+    fisheyeEffect(vis)
+    gotposts(perform_bottom_data, vis2, "node_bottom")
+    fisheyeEffect(vis2)
+    node = node_top.concat(node_bottom)
   }
 
   function addClickListener (section, dist) {
@@ -195,10 +224,8 @@ $(document).ready(function() {
   function getHeight (data) {
     const ROW_SPACING = 198.125
     totalPostNum = data.length
-    // console.log("Number of Posts: " + totalPostNum)
-    totalRow = (totalPostNum%stepsX !== 0) ? Math.floor(totalPostNum/stepsX) + 1 : totalPostNum/stepsX
+     totalRow = (totalPostNum%stepsX !== 0) ? Math.floor(totalPostNum/stepsX) + 1 : totalPostNum/stepsX
     section_height = (ROW_SPACING * totalRow) + 110
-    // console.log("ROW: " + totalRow, "SEC HEIGHT: " + section_height)
     return section_height
   }
 
@@ -322,8 +349,17 @@ $(document).ready(function() {
   // LOAD IMAGE FOR NODE
   function loadImage () {
     var element = d3.select(this)
-    element.select('image')
-      .attr('xlink:href', function (d) { return d.image })
+    var imageTest = new Image()
+    var image_url = element.data()["0"].image
+    
+    var image = element.select('image')
+    imageTest.src = image_url
+    imageTest.onload = function (d) {
+      image.attr('xlink:href', image_url)
+    }
+    imageTest.onerror = function () {
+      image.attr('xlink:href', error_image)
+    }
   }
 
   // REMOVE IMAGE FROM ALL NODES
@@ -464,9 +500,6 @@ $(document).ready(function() {
 
   function sortNodesByMetric (metric, sort_order, node) {
     removeImage()
-    console.log("metric: " + metric)
-    console.log("sort order: " + sort_order)
-    console.log(node)
     if (metric === 'brand') {
       sortByBrand(node, sort_order)
     } else {
@@ -531,8 +564,6 @@ $(document).ready(function() {
     filterData(sortComp)
   })
 
-
-
   d3.selection.prototype.moveToFront = function() {
     return this.each(function() {
       this.parentNode.appendChild(this)
@@ -594,6 +625,61 @@ $(document).ready(function() {
     return median
   }
 
+  function getDefaultDateRange(date) {
+    var dow = date.getUTCDay()
+    switch (dow) {
+        case 3:
+            day = "Wednesday"
+            diff = 9
+            break;
+        case 4:
+            day = "Thursday"
+            diff = 10
+            break;
+        case 5:
+            day = "Friday"
+            diff = 11
+            break;
+        case 6:
+            day = "Saturday"
+            diff = 12
+            break;
+        case 0:
+            day = "Sunday"
+            diff = 13
+            break;
+        case 1:
+            day = "Monday"
+            diff = 14
+            break;
+        case 2:
+            day = "Tuesday"
+            diff = 15
+            break;
+    }
+    date.setDate(date.getUTCDate() - diff)
+    var first_weekday = date.toLocaleDateString("en", output_options)
+    date.setDate(date.getUTCDate() + 6)
+    var last_weekday = date.toLocaleDateString("en", output_options)
+    return [first_weekday, last_weekday]
+  }
+
+  function formatDateForRequest(date) {
+    var date = date.split('/')
+    var year = date[2]
+    var month = date[0]
+    var day = date[1]
+    return year + '-' + month + '-' + day
+  }
+
+  function formatDateForCalendar(date) {
+    var date = date.split('-')
+    var year = date[0]
+    var month = date[1]
+    var day = date[2]
+    return month + '/' + day + '/' + year
+  }
+
   $('#to_bottom').on('mouseover', function(){
     $('#top_pointer').append('Jump to Bottom')
   })
@@ -612,19 +698,25 @@ $(document).ready(function() {
     var target = $(this.getAttribute('href'))
     var dist = target["0"].offsetTop
     var header_legend = $('header').height() + $('#legend').height()
-    console.log(header_legend)
     event.preventDefault()
     $('html').stop().animate({
       scrollTop: (dist - header_legend)
     }, 2000)
   })
 
-  $('input[name="daterange"]').daterangepicker();
-  $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
-    start_date = picker.startDate.format('YYYY-MM-DD')
-    end_date = picker.endDate.format('YYYY-MM-DD')
-    console.log(start_date);
-    console.log(end_date);
+  $('#date_input').daterangepicker(
+    {
+      opens: "center",
+      startDate: default_date_range[0],
+      endDate: default_date_range[1],
+      minDate: '06/01/2017',
+      maxDate: default_date_range[1]
+    }
+  );
+
+  $('#date_input').on('apply.daterangepicker', function(ev, picker) {
+    start_date = picker.startDate.format('MM/DD/YYYY')
+    end_date = picker.endDate.format('MM/DD/YYYY')
     getData([start_date, end_date])
   });
 
