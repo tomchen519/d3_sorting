@@ -190,3 +190,8 @@ active.tooltip {
     margin-top: -15px;
   }
 }
+
+#loading {
+  color: #397AF2;
+  margin-left: 10px;
+}

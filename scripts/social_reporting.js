@@ -14,10 +14,8 @@ var node_top = []
 var node_bottom = []
 var marginLeft = image_dim
 var marginRight = image_dim
-var page_height = 6500 // Needs to be adjusted depending on number of rows
+var page_height = 6500
 var topNode = null
-var color = d3.scale.category20()
-var money = d3.format('$,04d')
 var accounts_median = {}
 var data_date_range = []
 var error_image = '../assets/images/not_available.jpg'
@@ -44,7 +42,6 @@ $(document).ready(function() {
   var today = new Date()
   var output_options = {year:"numeric", month:"2-digit", day:"2-digit"}
 
-  var drag = d3.behavior.drag()
   var vis = d3.select('#d3-layout-container1')
     .append('svg')
     .attr('class', 'vis')
@@ -89,11 +86,6 @@ $(document).ready(function() {
     node_bottom.call(grid).call(updatePos)
     node_bottom.select('rect').attr('height', image_dim).attr('width', image_dim)
   })
-
-  if (window.self !== window.top) {
-    // we're in an iframe! oh on! hide the twitter follow button
-    $('.share-left').hide()
-  };
  
   var default_date_range = getDefaultDateRange(today)
 
@@ -101,7 +93,9 @@ $(document).ready(function() {
 
   function getData(date_range_list = null) {
     $('#legend_stats').html(
-      '<div>Loading Data...<span><i class="fa fa-circle-o-notch fa-spin"></i></span></div>')
+      '<div>Loading Data...<span id="loading">' +
+      '<i class="fa fa-circle-o-notch fa-spin"></i></span></div>'
+    )
     if (date_range_list !== null) {
       start_date = date_range_list[0]
       end_date = date_range_list[1]
@@ -389,6 +383,8 @@ $(document).ready(function() {
     num_comments = d.comments
     total_engage = num_likes + num_comments
     total_engage = total_engage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    num_likes = num_likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    num_comments = num_comments.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     engage_rate = ((d.engage_rate * 100).toFixed(2) + '%').toString()
     url = d.image
     username = d.username
@@ -680,6 +676,7 @@ $(document).ready(function() {
     return month + '/' + day + '/' + year
   }
 
+  // MOUSE HOVER TRIGGER TEXT FOR SECTION ANCHORS
   $('#to_bottom').on('mouseover', function(){
     $('#top_pointer').append('Jump to Bottom')
   })
@@ -693,7 +690,7 @@ $(document).ready(function() {
     $('#bottom_pointer').html('')
   })
 
-
+  // JUMPING BETWEEN TOP AND BOTTOM PERFORMING SECTIONS
   $('a[href^="#"], div[href^="#"]').on('click', function (event) {
     var target = $(this.getAttribute('href'))
     var dist = target["0"].offsetTop
@@ -704,6 +701,7 @@ $(document).ready(function() {
     }, 2000)
   })
 
+  // INITIALIZE CALENDAR
   $('#date_input').daterangepicker(
     {
       opens: "center",
@@ -714,6 +712,7 @@ $(document).ready(function() {
     }
   );
 
+  // EVENT LISTENER FOR DATE RANGE SELECTOR
   $('#date_input').on('apply.daterangepicker', function(ev, picker) {
     start_date = picker.startDate.format('MM/DD/YYYY')
     end_date = picker.endDate.format('MM/DD/YYYY')
